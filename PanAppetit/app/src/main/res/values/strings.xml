@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PanAppetit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="informative">Informativo</string>
+    <string name="detail_diaolog">Detalle del Dialogo</string>
 </resources>
