@@ -28,6 +28,9 @@
     <string name="details_credentials_incorrect">Verificas tus credenciales, estan incorrectas</string>
     <string name="firebase_login">Firebase Login</string>
     <string name="firebase_register">Firebase Register</string>
-
+    <string name="details_password">Los campos contraseña y confirmar contraseña no coinciden</string>
+    <string name="Error">Error</string>
+    <string name="user_create">Se creo correctamente el usuario</string>
+    <string name="login_user">Se Logueo correctamente el usuario</string>
 
 </resources>

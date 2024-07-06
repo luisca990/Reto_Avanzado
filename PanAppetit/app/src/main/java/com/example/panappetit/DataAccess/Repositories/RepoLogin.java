@@ -15,7 +15,7 @@ public class RepoLogin {
         ).loginWithUser(user);
     }
 
-    public <T extends IRepository> void RegisterUser(Context context,User user, T responder, Services servicio) {
+    public <T extends IRepository> void RegisterUser(Context context, User user, T responder, Services servicio) {
         new Login(context,
                 () -> responder.onSuccessResponse(user, servicio),
                 () -> responder.onFailedResponse(new MessageResponse(), servicio)

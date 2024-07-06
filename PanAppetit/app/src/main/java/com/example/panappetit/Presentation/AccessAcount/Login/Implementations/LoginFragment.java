@@ -59,7 +59,7 @@ public class LoginFragment extends BaseFragment {
 
         @Override
         public void responseLogin(@NonNull User user) {
-            Toast.makeText(getContext(), getString(R.string.register_user), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.login_user), Toast.LENGTH_SHORT).show();
             //Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
         }
 

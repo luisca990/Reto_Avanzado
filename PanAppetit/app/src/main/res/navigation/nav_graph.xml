@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.panappetit.Presentation.AccessAcount.Register.RegisterFragment"
+        android:name="com.example.panappetit.Presentation.AccessAcount.Register.Implementations.RegisterFragment"
         android:label="RegisterFragment"/>
 
 
