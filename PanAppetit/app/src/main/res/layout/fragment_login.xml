@@ -61,6 +61,7 @@
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:hint="@string/Email"
+                android:importantForAutofill="no"
                 android:textColorHint="@color/colorAccent"
                 android:textStyle="bold"
                 android:inputType="textEmailAddress"

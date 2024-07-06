@@ -16,4 +16,7 @@
     <string name="registrar_usuario">Registrar Usuario</string>
 
 
+    <string name="register_user">Registra tu Usuario</string>
+    <string name="conf_password">Confirmar Contraseña</string>
+    <string name="btn_create">Crear Usuario</string>
 </resources>
