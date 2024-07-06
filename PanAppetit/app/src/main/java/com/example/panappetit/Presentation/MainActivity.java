@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Obtén el fragmento actual visible
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
         Fragment currentFragment = navHostFragment.getChildFragmentManager().getPrimaryNavigationFragment();

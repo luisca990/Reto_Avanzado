@@ -7,4 +7,13 @@
     <string name="btn_cancel">Cancelar</string>
     <string name="informative">Informativo</string>
     <string name="detail_diaolog">Detalle del Dialogo</string>
+
+    <string name="init_section">Inicio de Sección</string>
+    <string name="Email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="CaracteresPass">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*</string>
+    <string name="log_in">Iniciar Sesión</string>
+    <string name="registrar_usuario">Registrar Usuario</string>
+
+
 </resources>
