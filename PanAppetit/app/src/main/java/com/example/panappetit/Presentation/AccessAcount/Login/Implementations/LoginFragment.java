@@ -20,7 +20,6 @@ import com.example.panappetit.R;
 import com.example.panappetit.Utils.DialogueGenerico;
 
 public class LoginFragment extends BaseFragment {
-
     private Button btnSeccion;
     private TextView btnTextRegister;
     private EditText editEmail;
@@ -60,7 +59,7 @@ public class LoginFragment extends BaseFragment {
         @Override
         public void responseLogin(@NonNull User user) {
             Toast.makeText(getContext(), getString(R.string.login_user), Toast.LENGTH_SHORT).show();
-            //Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
+            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
         }
 
         @Override

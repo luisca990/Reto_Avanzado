@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -26,6 +29,11 @@
         android:name="com.example.panappetit.Presentation.AccessAcount.Register.Implementations.RegisterFragment"
         android:label="RegisterFragment"/>
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.panappetit.Presentation.Dash.Home.HomeFragment"
+        android:label="HomeFragment">
+    </fragment>
 
 
 </navigation>
