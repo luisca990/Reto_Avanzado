@@ -1,6 +1,6 @@
 package com.example.panappetit.Models;
 
-public class User {
+public class User{
     private String email;
     private String password;
     private String confPassword;

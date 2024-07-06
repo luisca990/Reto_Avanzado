@@ -9,7 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.panappetit.Presentation.AccessAcount.SplashFragment;
-import com.example.panappetit.Presentation.AccessAcount.Login.LoginFragment;
+import com.example.panappetit.Presentation.AccessAcount.Login.Implementations.LoginFragment;
 import com.example.panappetit.R;
 
 public class MainActivity extends AppCompatActivity {

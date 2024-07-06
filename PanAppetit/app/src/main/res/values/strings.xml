@@ -19,4 +19,15 @@
     <string name="register_user">Registra tu Usuario</string>
     <string name="conf_password">Confirmar Contraseña</string>
     <string name="btn_create">Crear Usuario</string>
+
+    <string name="internet">Conexión de Internet</string>
+    <string name="not_connection_internet">No tienes conexion a internet, busca una coneccion</string>
+    <string name="fields_empty">Campos Vacios</string>
+    <string name="details_fields_empty">Verifique, ya que hay algun campo vacio</string>
+    <string name="credentials_incorrect">Credenciales</string>
+    <string name="details_credentials_incorrect">Verificas tus credenciales, estan incorrectas</string>
+    <string name="firebase_login">Firebase Login</string>
+    <string name="firebase_register">Firebase Register</string>
+
+
 </resources>
