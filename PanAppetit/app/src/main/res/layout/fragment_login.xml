@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Presentation.AccessAcount.Login.Implementations.LoginFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_10dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_name_fragment_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/init_section"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="@dimen/_35sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/ll_container_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15dp"
+            android:background="@drawable/edt_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_fragment_login" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_edt"
+                android:importantForAccessibility="no"
+                android:padding="@dimen/_20dp"
+                android:src="@android:drawable/sym_action_email"
+                android:tint="@color/colorPrimaryAccessDark"
+                tools:ignore="UseAppTint" />
+
+            <EditText
+                android:id="@+id/et_email_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="@string/Email"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/colorAccent"
+                android:textStyle="bold"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_container_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:background="@drawable/edt_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_container_email" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_edt"
+                android:importantForAccessibility="no"
+                android:padding="@dimen/_20dp"
+                android:src="@android:drawable/ic_lock_idle_lock"
+                android:tint="@color/colorPrimaryAccessDark"
+                tools:ignore="UseAppTint" />
+
+            <EditText
+                android:id="@+id/et_Pass_Login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="@string/password"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/colorAccent"
+                android:inputType="textPassword"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:digits="@string/CaracteresPass"
+                android:maxLength="10" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_start_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:text="@string/log_in"
+            android:background="@drawable/btn_general"
+            android:textColor="@color/colorPrimaryAccessDark"
+            android:textSize="@dimen/_18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_container_password"/>
+
+        <TextView
+            android:id="@+id/tv_register_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_15dp"
+            android:text="@string/registrar_usuario"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_start_section" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

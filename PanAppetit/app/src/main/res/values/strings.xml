@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">PanAppetit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="informative">Informativo</string>
+    <string name="detail_diaolog">Detalle del Dialogo</string>
+
+    <string name="init_section">Inicio de Sección</string>
+    <string name="Email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="CaracteresPass">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*</string>
+    <string name="log_in">Iniciar Sesión</string>
+    <string name="registrar_usuario">Registrar Usuario</string>
+
+
+    <string name="register_user">Registra tu Usuario</string>
+    <string name="conf_password">Confirmar Contraseña</string>
+    <string name="btn_create">Crear Usuario</string>
+
+    <string name="internet">Conexión de Internet</string>
+    <string name="not_connection_internet">No tienes conexion a internet, busca una coneccion</string>
+    <string name="fields_empty">Campos Vacios</string>
+    <string name="details_fields_empty">Verifique, ya que hay algun campo vacio</string>
+    <string name="credentials_incorrect">Credenciales</string>
+    <string name="details_credentials_incorrect">Verificas tus credenciales, estan incorrectas</string>
+    <string name="firebase_login">Firebase Login</string>
+    <string name="firebase_register">Firebase Register</string>
+    <string name="details_password">Los campos contraseña y confirmar contraseña no coinciden</string>
+    <string name="Error">Error</string>
+    <string name="user_create">Se creo correctamente el usuario</string>
+    <string name="login_user">Se Logueo correctamente el usuario</string>
+
 </resources>
