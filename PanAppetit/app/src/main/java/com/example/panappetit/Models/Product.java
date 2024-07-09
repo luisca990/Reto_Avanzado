@@ -1,11 +1,13 @@
 package com.example.panappetit.Models;
 
 public class Product {
-    private String nombre;
-    private String descripcion;
-    private Float precio;
-    private Integer cantidad;
-    private String image;
+
+    private int id;
+    private final String nombre;
+    private final String descripcion;
+    private final Float precio;
+    private final Integer cantidad;
+    private final String image;
 
     public Product(String nombre, String descripcion, Float precio, Integer cantidad, String image) {
         this.nombre = nombre;
@@ -26,39 +28,25 @@ public class Product {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getDescripcion() {
         return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public Float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Float precio) {
-        this.precio = precio;
-    }
-
     public Integer getCantidad() {
         return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
     }
 
     public String getImage() {
         return image;
     }
-
-    public void setImage(String image) {
-        this.image = image;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }
