@@ -13,7 +13,7 @@
     <string name="password">Contraseña</string>
     <string name="CaracteresPass">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*</string>
     <string name="log_in">Iniciar Sesión</string>
-    <string name="registrar_usuario">Registrar Usuario</string>
+    <string name="registrar_usuario"><u> Registrar Usuario </u></string>
 
 
     <string name="register_user">Registra tu Usuario</string>

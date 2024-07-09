@@ -17,4 +17,6 @@
     <dimen name="_20sp">20sp</dimen>
     <dimen name="_3dp">3dp</dimen>
     <dimen name="_3pt">3pt</dimen>
+    <dimen name="_35dp">35dp</dimen>
+    <dimen name="_30sp">30sp</dimen>
 </resources>
