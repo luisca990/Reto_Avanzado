@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.AccessAcount.Register.Implementations.RegisterFragment">
+
+    <TextView
+        android:id="@+id/tv_name_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_100dp"
+        android:text="@string/register_user"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/_35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_container_email_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edt_general"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_register">
+
+        <EditText
+            android:id="@+id/et_email_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_56dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/Email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:textCursorDrawable="@drawable/cursor_general" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_container_pass_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edt_general"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_container_email_register">
+
+        <EditText
+            android:id="@+id/et_pass_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_56dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:textCursorDrawable="@drawable/cursor_general" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_container_conf_pass_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edt_general"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_container_pass_register">
+
+        <EditText
+            android:id="@+id/et_conf_pass_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_56dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/conf_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:textCursorDrawable="@drawable/cursor_general" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCrear_register"
+        style="@style/EstilosEdtBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_create_user"
+        android:layout_marginTop="@dimen/_25dp"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_10dp"
+        android:text="@string/btn_create"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryAccessDark"
+        android:textSize="@dimen/_20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_container_conf_pass_register" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
