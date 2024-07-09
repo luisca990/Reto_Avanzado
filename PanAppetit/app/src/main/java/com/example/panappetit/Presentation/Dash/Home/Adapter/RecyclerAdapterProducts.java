@@ -1,6 +1,6 @@
 package com.example.panappetit.Presentation.Dash.Home.Adapter;
 
-//import static com.example.panappetit.Utils.Util.convertImageService;
+import static com.example.panappetit.Utils.Util.convertImageService;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,7 +21,7 @@ import java.util.List;
 public class RecyclerAdapterProducts extends RecyclerView.Adapter<RecyclerAdapterProducts.ViewHolder> {
 
     private List<Product> products;
-    private Context context;
+    private final Context context;
     private final OnItemClickListenerProduct listener;
 
     @SuppressLint("NotifyDataSetChanged")
@@ -66,12 +66,13 @@ public class RecyclerAdapterProducts extends RecyclerView.Adapter<RecyclerAdapte
             stock = itemView.findViewById(R.id.tv_stock);
 
         }
+        @SuppressLint("SetTextI18n")
         void setDetailCategoria(Product product){
             name.setText(product.getNombre());
-            //convertImageService(product.getImage(), imageView, 150);
-            imageView.setOnClickListener(v -> {
-                listener.onItemClick(product);
-            });
+            precio.setText(product.getPrecio().toString());
+            stock.setText(product.getCantidad().toString());
+            convertImageService(product.getImage(), imageView, 150);
+            imageView.setOnClickListener(v -> listener.onItemClick(product));
         }
     }
 }
