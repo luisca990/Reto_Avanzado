@@ -57,25 +57,27 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_title" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="#D9D9D9"
         android:layout_marginTop="@dimen/_16dp"
+        android:background="#D9D9D9"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" >
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
+
         <TextView
             android:id="@+id/tvSubTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16dp"
             android:layout_marginStart="@dimen/_16dp"
+            android:layout_marginTop="@dimen/_16dp"
             android:layout_marginEnd="@dimen/_16dp"
             android:text="Selecciona tu pan Favorito"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16sp"/>
+            android:textSize="@dimen/_16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProducts"
@@ -83,9 +85,37 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_16dp"
             android:layout_marginEnd="@dimen/_16dp"
+            android:layout_marginBottom="@dimen/_10dp"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/_8dp"
-            android:layout_marginBottom="@dimen/_10dp"/>
+            android:paddingBottom="@dimen/_8dp" />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:src="@mipmap/ic_input_add"
+        app:fabSize="mini"
+        style="@style/CustomFAB"
+        app:backgroundTint="@color/grayBack"
+        android:layout_marginBottom="@dimen/_25dp"
+        android:layout_marginEnd="@dimen/_25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:src="@mipmap/ic_input_buy"
+        app:fabSize="mini"
+        style="@style/CustomFAB"
+        app:backgroundTint="@color/grayBack"
+        android:layout_marginBottom="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/_25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fab_add"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

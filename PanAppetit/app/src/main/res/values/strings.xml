@@ -33,5 +33,15 @@
     <string name="user_create">Se creo correctamente el usuario</string>
     <string name="login_user">Se Logueo correctamente el usuario</string>
     <string name="title_home">Menu de Delicias</string>
+    <string name="agregar_producto">Agregar Producto</string>
+    <string name="imagen_url">Imagen (URL)</string>
+    <string name="value">Value</string>
+    <string name="name">Nombre</string>
+    <string name="descript">Descripción</string>
+    <string name="details">Detalles</string>
+    <string name="count">"Cantidad: "</string>
+    <string name="precio_unitario">"Precio Unitario: "</string>
+    <string name="update">Actualizar</string>
+    <string name="delete">Eliminar</string>
 
 </resources>

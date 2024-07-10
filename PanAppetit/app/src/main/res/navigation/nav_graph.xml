@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.panappetit.Presentation.AccessAcount.SplashFragment"
@@ -36,7 +36,27 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addUpdateFragment"
+            app:destination="@id/addUpdateFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailFragment"
+        android:label="DetailFragment">
+        <argument
+            android:name="product"
+            app:argType="com.example.panappetit.Models.Product"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addUpdateFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.AddUpdateFragment"
+        android:label="AddUpdateFragment"/>
 
 </navigation>

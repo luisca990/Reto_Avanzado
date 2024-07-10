@@ -1,12 +1,16 @@
 package com.example.panappetit.Models;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
 
 import java.util.List;
 
-public class Product {
+public class Product implements Parcelable {
 
     private int id;
     private final String nombre;
@@ -58,5 +62,39 @@ public class Product {
 
     public static List<Product> getListProduct(ProductDao dao){
         return dao.getListProducts();
+    }
+    protected Product(Parcel in){
+        id = in.readInt();
+        nombre = in.readString();
+        descripcion = in.readString();
+        cantidad = in.readInt();
+        precio = in.readFloat();
+        image = in.readString();
+    }
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int flags) {
+        parcel.writeInt(id);
+        parcel.writeString(nombre);
+        parcel.writeString(descripcion);
+        parcel.writeInt(cantidad);
+        parcel.writeFloat(precio);
+        parcel.writeString(image);
     }
 }
