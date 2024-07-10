@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.panappetit.Presentation.AccessAcount.SplashFragment"
@@ -31,8 +31,11 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.panappetit.Presentation.Dash.Home.HomeFragment"
+        android:name="com.example.panappetit.Presentation.Dash.Home.Implementations.HomeFragment"
         android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
 

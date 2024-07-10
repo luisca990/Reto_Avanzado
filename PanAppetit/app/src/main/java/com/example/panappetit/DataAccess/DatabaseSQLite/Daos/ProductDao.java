@@ -1,5 +1,7 @@
 package com.example.panappetit.DataAccess.DatabaseSQLite.Daos;
 
+import static com.example.panappetit.Utils.Constants.TABLE_PRODUCTS;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -37,13 +39,13 @@ public class ProductDao {
         values.put("precio", product.getPrecio()); // Inserción del precio del producto
         values.put("cantidad_stock", product.getCantidad()); // Inserción del cantidad del producto
         values.put("imagen", product.getImage()); // Inserción del imagen del producto
-        return db.insert("usuarios", null, values);
+        return db.insert(TABLE_PRODUCTS, null, values);
     }
 
-    // Método para obtener todos los usuarios de la tabla 'usuarios'
+    // Método para obtener todos los productos de la tabla 'productos'
     public List<Product> getListProducts() {
-        List<Product> productos = new ArrayList<>(); // Lista para almacenar los usuarios obtenidos
-        Cursor cursor = db.rawQuery("SELECT * FROM productos", null); // Ejecución de la consulta SQL
+        List<Product> productos = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS, null); // Ejecución de la consulta SQL
 
         // Iteración sobre los resultados del cursor para obtener los datos de cada usuario
         if (cursor.moveToFirst()) {
@@ -53,12 +55,12 @@ public class ProductDao {
                         cursor.getString(2),
                         cursor.getFloat(3),
                         cursor.getInt(4),
-                        cursor.getString(5)); // Creación de una nueva instancia de Usuario
+                        cursor.getString(5));
                 product.setId(cursor.getInt(0));
                 productos.add(product);
             } while (cursor.moveToNext());
         }
         cursor.close(); // Cierre del cursor
-        return productos; // Retorno de la lista de usuarios
+        return productos;
     }
 }

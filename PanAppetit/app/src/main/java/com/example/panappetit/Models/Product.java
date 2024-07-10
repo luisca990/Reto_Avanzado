@@ -1,5 +1,11 @@
 package com.example.panappetit.Models;
 
+import android.content.Context;
+
+import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
+
+import java.util.List;
+
 public class Product {
 
     private int id;
@@ -48,5 +54,9 @@ public class Product {
     }
     public void setId(int id) {
         this.id = id;
+    }
+
+    public static List<Product> getListProduct(ProductDao dao){
+        return dao.getListProducts();
     }
 }

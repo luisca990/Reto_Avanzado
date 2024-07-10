@@ -32,5 +32,6 @@
     <string name="Error">Error</string>
     <string name="user_create">Se creo correctamente el usuario</string>
     <string name="login_user">Se Logueo correctamente el usuario</string>
+    <string name="title_home">Menu de Delicias</string>
 
 </resources>
