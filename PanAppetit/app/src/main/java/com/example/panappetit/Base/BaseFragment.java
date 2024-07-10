@@ -1,5 +1,7 @@
 package com.example.panappetit.Base;
 
+import static com.example.panappetit.Utils.Util.hideKeyboard;
+
 import android.util.Log;
 import android.view.View;
 
@@ -33,5 +35,9 @@ public class BaseFragment extends Fragment {
         if (getContext() != null) {
             Util.showDialogueGenerico(getContext());
         }
+    }
+
+    public void hideKeyboardFragment(){
+        hideKeyboard(this);
     }
 }

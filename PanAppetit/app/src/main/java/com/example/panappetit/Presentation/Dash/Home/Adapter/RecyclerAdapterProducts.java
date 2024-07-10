@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapterProducts extends RecyclerView.Adapter<RecyclerAdapterProducts.ViewHolder> {
@@ -36,6 +37,7 @@ public class RecyclerAdapterProducts extends RecyclerView.Adapter<RecyclerAdapte
         this.listener = listener;
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,24 +55,34 @@ public class RecyclerAdapterProducts extends RecyclerView.Adapter<RecyclerAdapte
         return products.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void filter(String text) {
+        List<Product> filter = new ArrayList<>();
+        text = text.toLowerCase();
+        for (Product product : products) {
+            if (product.getNombre().toLowerCase().contains(text)) {
+                filter.add(product);
+            }
+        }
+        products = filter;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
         private final TextView name;
         private final TextView precio;
-        private final TextView stock;
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.iv_character);
             name = itemView.findViewById(R.id.tv_name);
             precio = itemView.findViewById(R.id.tv_precio);
-            stock = itemView.findViewById(R.id.tv_stock);
 
         }
         @SuppressLint("SetTextI18n")
         void setDetailCategoria(Product product){
             name.setText(product.getNombre());
             precio.setText(product.getPrecio().toString());
-            stock.setText(product.getCantidad().toString());
             convertImageService(product.getImage(), imageView, 150);
             imageView.setOnClickListener(v -> listener.onItemClick(product));
         }

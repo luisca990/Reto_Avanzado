@@ -5,9 +5,11 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.UsuarioDao;
 import com.example.panappetit.DataAccess.Repositories.IRepository;
 import com.example.panappetit.DataAccess.Repositories.RepoLogin;
 import com.example.panappetit.DataAccess.Services;
+import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
 import com.example.panappetit.Models.MessageResponse;
 import com.example.panappetit.Models.User;
 import com.example.panappetit.Presentation.AccessAcount.Login.Interfaces.ILoginBL;
@@ -17,10 +19,16 @@ public class LoginBL implements ILoginBL {
 
     private final Context context;
     private final ILoginListener listener;
+    private final SessionManager sessionManager;
+    private final UsuarioDao dao;
+
 
     public LoginBL(Context context, ILoginListener loginListener) {
         this.context = context;
         this.listener = loginListener;
+        this.sessionManager = new SessionManager(context);
+        this.dao = new UsuarioDao(context);
+        dao.openDb();
     }
 
     @Override
@@ -33,7 +41,11 @@ public class LoginBL implements ILoginBL {
         @Override
         public void onSuccessResponse(Object objectResponse, Services services) {
             if (services == Services.LOGIN) {
-                listener.responseLogin((User) objectResponse);
+                User user = (User) objectResponse;
+                listener.responseLogin(user);
+                long userID = dao.insertUser(user);
+                sessionManager.createLoginSession(user.getEmail(), (int) userID);
+                dao.closeDb();
             }
         }
 
@@ -41,6 +53,7 @@ public class LoginBL implements ILoginBL {
         public void onFailedResponse(MessageResponse response, Services services) {
             if (services == Services.LOGIN) {
                 listener.credentialsIncorrect();
+                dao.closeDb();
             }
         }
     }

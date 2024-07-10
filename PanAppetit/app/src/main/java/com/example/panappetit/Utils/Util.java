@@ -1,11 +1,15 @@
 package com.example.panappetit.Utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
@@ -37,6 +41,17 @@ public class Util {
                     .into(viewImage);
         }catch (Exception e){
             System.out.println(e.getMessage());
+        }
+    }
+    public static void hideKeyboard(Fragment fragment) {
+        Activity activity = fragment.getActivity();
+        if (activity != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            View view = activity.getCurrentFocus();
+            if (view == null) {
+                view = new View(activity);
+            }
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 }
