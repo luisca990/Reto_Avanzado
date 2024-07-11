@@ -23,6 +23,7 @@ import com.example.panappetit.Presentation.Dash.Home.Adapter.OnItemClickListener
 import com.example.panappetit.Presentation.Dash.Home.Adapter.RecyclerAdapterProducts;
 import com.example.panappetit.Presentation.Dash.Home.Interfaces.IHomeView;
 import com.example.panappetit.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,8 @@ public class HomeFragment extends BaseFragment {
     private RecyclerAdapterProducts adapter;
     private SearchView search;
     private ImageView logout;
+    private FloatingActionButton fabAdd;
+    private FloatingActionButton fabCar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class HomeFragment extends BaseFragment {
         RecyclerView rv = getCustomView().findViewById(R.id.rvProducts);
         search = getCustomView().findViewById(R.id.searchView);
         logout = getCustomView().findViewById(R.id.iv_logout);
+        fabAdd = getCustomView().findViewById(R.id.fab_add);
+        fabCar = getCustomView().findViewById(R.id.fab_buy);
         presenter = new HomePresenter(new listenerPresenter(), getContext());
         sessionManager = new SessionManager(requireContext());
 
@@ -66,6 +71,12 @@ public class HomeFragment extends BaseFragment {
             sessionManager.logout();
             Toast.makeText(getContext(), "El usuario "+sessionManager.getUserEmail()+" se deslogueo", Toast.LENGTH_SHORT).show();
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_loginFragment);
+        });
+        fabAdd.setOnClickListener(v->{
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_addUpdateFragment);
+        });
+        fabCar.setOnClickListener(v->{
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment);
         });
     }
     private void displaySesion(){
@@ -106,10 +117,12 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    private static class listenerAdapter implements OnItemClickListenerProduct {
+    private class listenerAdapter implements OnItemClickListenerProduct {
         @Override
         public void onItemClick(Product product) {
-
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("product", product);
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailFragment, bundle);
         }
     }
 
