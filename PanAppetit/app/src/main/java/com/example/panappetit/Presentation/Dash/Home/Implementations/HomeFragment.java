@@ -76,6 +76,7 @@ public class HomeFragment extends BaseFragment {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_addUpdateFragment);
         });
         fabCar.setOnClickListener(v->{
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment);
         });
     }
     private void displaySesion(){

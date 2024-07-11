@@ -43,5 +43,7 @@
     <string name="precio_unitario">"Precio Unitario: "</string>
     <string name="update">Actualizar</string>
     <string name="delete">Eliminar</string>
+    <string name="add_car">Añadir al Carrito</string>
+    <string name="count_car">Cantidad</string>
 
 </resources>

@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addUpdateFragment"
             app:destination="@id/addUpdateFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailClientFragment"
+            app:destination="@id/detailClientFragment" />
     </fragment>
 
     <fragment
@@ -58,5 +61,15 @@
         android:id="@+id/addUpdateFragment"
         android:name="com.example.panappetit.Presentation.Dash.ManageProduct.AddUpdateFragment"
         android:label="AddUpdateFragment"/>
+
+    <fragment
+        android:id="@+id/detailClientFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailClientFragment"
+        android:label="DetailClientFragment">
+        <argument
+            android:name="product"
+            app:argType="com.example.panappetit.Models.Product"
+            app:nullable="false" />
+    </fragment>
 
 </navigation>
