@@ -83,6 +83,8 @@ public class HomeFragment extends BaseFragment {
     private void isVisibleButons() {
         if (!typeUser.equals(getString(R.string.admin))) {
             fabAdd.setVisibility(View.INVISIBLE);
+        }else {
+            fabCar.setVisibility(View.INVISIBLE);
         }
     }
     private void displaySesion(){
