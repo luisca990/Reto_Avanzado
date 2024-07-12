@@ -102,7 +102,7 @@
         android:layout_marginBottom="@dimen/_25dp"
         android:layout_marginEnd="@dimen/_25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/fab_buy" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_buy"
@@ -116,6 +116,6 @@
         android:layout_marginBottom="@dimen/_16dp"
         android:layout_marginEnd="@dimen/_25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fab_add"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

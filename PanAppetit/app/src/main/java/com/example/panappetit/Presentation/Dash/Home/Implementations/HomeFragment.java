@@ -23,6 +23,7 @@ import com.example.panappetit.Presentation.Dash.Home.Adapter.OnItemClickListener
 import com.example.panappetit.Presentation.Dash.Home.Adapter.RecyclerAdapterProducts;
 import com.example.panappetit.Presentation.Dash.Home.Interfaces.IHomeView;
 import com.example.panappetit.R;
+import com.example.panappetit.Utils.Constants;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -32,13 +33,13 @@ import java.util.Objects;
 public class HomeFragment extends BaseFragment {
     private HomePresenter presenter;
     private SessionManager sessionManager;
-    private ProductDao dao;
     private List<Product> productsList;
     private RecyclerAdapterProducts adapter;
     private SearchView search;
     private ImageView logout;
     private FloatingActionButton fabAdd;
     private FloatingActionButton fabCar;
+    private String typeUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +59,11 @@ public class HomeFragment extends BaseFragment {
         rv.setLayoutManager(new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false));
         rv.setAdapter(adapter);
 
+        if (getArguments() != null) {
+             typeUser = getArguments().getString(Constants.Tag.USER);
+        }
+
+        isVisibleButons();
         displaySesion();
         textSearchProduct();
         return getCustomView();
@@ -76,12 +82,19 @@ public class HomeFragment extends BaseFragment {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_addUpdateFragment);
         });
         fabCar.setOnClickListener(v->{
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment);
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_shoppingCartFragment);
         });
     }
+    private void isVisibleButons() {
+        if (!typeUser.equals(getString(R.string.admin))) {
+            fabAdd.setVisibility(View.INVISIBLE);
+        }
+    }
     private void displaySesion(){
-        if (!sessionManager.isLoggedIn()) Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_loginFragment);
-        Toast.makeText(getContext(), "El usuario "+sessionManager.getUserEmail()+" no esta logueado", Toast.LENGTH_SHORT).show();
+        if (!sessionManager.isLoggedIn()) {
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_loginFragment);
+            Toast.makeText(getContext(), "El usuario " + sessionManager.getUserEmail() + " no esta logueado", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void textSearchProduct(){
@@ -110,11 +123,6 @@ public class HomeFragment extends BaseFragment {
             productsList = products;
             adapter.updateList(products);
         }
-
-        @Override
-        public void showMainError(MessageResponse message) {
-
-        }
     }
 
     private class listenerAdapter implements OnItemClickListenerProduct {
@@ -122,13 +130,11 @@ public class HomeFragment extends BaseFragment {
         public void onItemClick(Product product) {
             Bundle bundle = new Bundle();
             bundle.putParcelable("product", product);
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailFragment, bundle);
+            if (typeUser.equals("admin")) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailFragment, bundle);
+            }else {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment);
+            }
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        dao.closeDb();
     }
 }

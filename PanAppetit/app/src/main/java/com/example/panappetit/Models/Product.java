@@ -60,9 +60,14 @@ public class Product implements Parcelable {
         this.id = id;
     }
 
+    //Metodos de consumos SQlite
+    public int insertProduct(ProductDao dao, Product product){return (int) dao.insertProduct(product);}
+    public int updateProduct(ProductDao dao, Product product){return (int) dao.updateProduct(product);}
     public static List<Product> getListProduct(ProductDao dao){
         return dao.getListProducts();
     }
+
+    // Parceo del modelo
     protected Product(Parcel in){
         id = in.readInt();
         nombre = in.readString();
@@ -82,12 +87,10 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
-
     @Override
     public int describeContents() {
         return 0;
     }
-
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int flags) {
         parcel.writeInt(id);

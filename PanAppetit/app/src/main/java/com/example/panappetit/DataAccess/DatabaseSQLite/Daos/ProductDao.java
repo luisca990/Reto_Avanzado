@@ -41,6 +41,28 @@ public class ProductDao {
         values.put("imagen", product.getImage()); // Inserción del imagen del producto
         return db.insert(TABLE_PRODUCTS, null, values);
     }
+    public long updateProduct(Product product){
+        ContentValues values = new ContentValues(); // Objeto para almacenar los valores a actualizar
+        values.put("nombre", product.getNombre()); // Actualización del nombre del producto
+        values.put("descripcion", product.getDescripcion()); // Actualización de la descripcion del producto
+        values.put("precio", product.getPrecio()); // Actualización del precio del producto
+        values.put("cantidad_stock", product.getCantidad()); // Actualización de la cantidad del producto
+        values.put("imagen", product.getImage()); // Actualización de la imagen del producto
+
+        // Definición de la condición para la actualización (en este caso, el ID del producto)
+        String selection = "id = ?";
+        String[] selectionArgs = { String.valueOf(product.getId()) };
+
+        // Realización de la actualización y obtención del número de filas afectadas
+        int count = db.update(TABLE_PRODUCTS, values, selection, selectionArgs);
+
+        // Si la actualización fue exitosa, devolver el ID del producto
+        if (count > 0) {
+            return product.getId();
+        } else {
+            return -1; // Indica que la actualización no se realizó correctamente
+        }
+    }
 
     // Método para obtener todos los productos de la tabla 'productos'
     public List<Product> getListProducts() {

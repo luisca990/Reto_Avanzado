@@ -45,5 +45,17 @@
     <string name="delete">Eliminar</string>
     <string name="add_car">Añadir al Carrito</string>
     <string name="count_car">Cantidad</string>
+    <string name="shopping">Mi Carro de Compras</string>
+    <string name="seleccionar_todo">Seleccionar Todo</string>
+    <string name="comprar">Comprar</string>
+    <string name="admin">admin</string>
+    <string name="fiels_vacio">Campos Vacios</string>
+    <string name="mess_fiels_vacio">Todos los campos deben estar llenos, verifica.</string>
+    <string name="actualizar_producto">Actualizar Producto</string>
+    <string name="insertar_usuario">Insertar usuario</string>
+    <string name="insert_user">"Se inserto correctamente el producto con el id: "</string>
+    <string name="update_user">"Se actualizo correctamente el producto con el id: "</string>
+    <string name="update_usuario">Actualizar Producto</string>
+    <string name="save">Guardar</string>
 
 </resources>

@@ -8,7 +8,7 @@
     android:background="@color/grayBack"
     android:layout_gravity="center"
     android:paddingTop="@dimen/_16dp"
-    tools:context=".Presentation.Dash.ManageProduct.AddUpdateFragment">
+    tools:context=".Presentation.Dash.ManageProduct.AddUpdate.Implementations.AddUpdateFragment">
 
     <LinearLayout
         android:id="@+id/ll_title"
@@ -69,7 +69,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
                     <ImageView
-                        android:id="@+id/iv_character"
+                        android:id="@+id/iv_image_add_update"
                         android:layout_width="200dp"
                         android:layout_height="180dp"
                         android:importantForAccessibility="no"
@@ -192,7 +192,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/name"
+                        android:text="@string/count"
                         android:textColor="@color/white"
                         android:layout_marginBottom="@dimen/_8dp"
                         android:textSize="@dimen/_14sp"
@@ -219,7 +219,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/name"
+                        android:text="@string/precio_unitario"
                         android:textColor="@color/white"
                         android:layout_marginBottom="@dimen/_8dp"
                         android:textSize="@dimen/_14sp"
@@ -241,14 +241,14 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_start_section"
+                android:id="@+id/btn_add_update"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_25dp"
                 android:layout_marginStart="@dimen/_16dp"
                 android:layout_marginEnd="@dimen/_16dp"
                 android:background="@drawable/btn_purple"
-                android:text="@string/log_in"
+                android:text="@string/save"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sp"
                 android:textStyle="bold"

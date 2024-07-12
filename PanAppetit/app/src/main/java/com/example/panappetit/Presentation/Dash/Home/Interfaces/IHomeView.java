@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface IHomeView {
     void showGetAllProductsSuccess(List<Product> products);
-    void showMainError(MessageResponse message);
 }

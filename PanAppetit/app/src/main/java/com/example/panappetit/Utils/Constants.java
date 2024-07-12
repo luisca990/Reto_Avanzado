@@ -4,6 +4,8 @@ public class Constants {
     public static class Tag {
         public static final String LOGIN = "Login";
         public static final String REGISTER = "Register";
+        public static final String ADMIN = "admin@gmail.com";
+        public static final String USER = "user";
     }
 
     //  Nombres Tablas

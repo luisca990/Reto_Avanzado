@@ -17,7 +17,10 @@ import com.example.panappetit.Models.User;
 import com.example.panappetit.Presentation.AccessAcount.Login.Interfaces.ILoginPresenter;
 import com.example.panappetit.Presentation.AccessAcount.Login.Interfaces.ILoginView;
 import com.example.panappetit.R;
+import com.example.panappetit.Utils.Constants;
 import com.example.panappetit.Utils.DialogueGenerico;
+
+import java.util.Objects;
 
 public class LoginFragment extends BaseFragment {
     private Button btnSeccion;
@@ -37,13 +40,12 @@ public class LoginFragment extends BaseFragment {
         btnTextRegister = getCustomView().findViewById(R.id.tv_register_user);
         editEmail = getCustomView().findViewById(R.id.et_email_login);
         editPass = getCustomView().findViewById(R.id.et_Pass_Login);
-
-        presenter = new LoginPresenter(requireContext(), actionPresenter);
         return getCustomView();
     }
 
     @Override
     public void onResume() {
+        presenter = new LoginPresenter(requireContext(), actionPresenter);
         super.onResume();
         btnSeccion.setOnClickListener(v->{
             user = new User();
@@ -59,7 +61,13 @@ public class LoginFragment extends BaseFragment {
         @Override
         public void responseLogin(@NonNull User user) {
             Toast.makeText(getContext(), getString(R.string.login_user), Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
+            Bundle bundle = new Bundle();
+            if ((Objects.equals(user.getEmail(), Constants.Tag.ADMIN))) {
+                bundle.putString(Constants.Tag.USER, "admin");
+            } else {
+                bundle.putString(Constants.Tag.USER, "client");
+            }
+            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment, bundle);
         }
 
         @Override
