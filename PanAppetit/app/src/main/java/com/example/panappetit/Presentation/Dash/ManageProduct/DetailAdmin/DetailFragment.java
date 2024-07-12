@@ -1,7 +1,8 @@
-package com.example.panappetit.Presentation.Dash.ManageProduct;
+package com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin;
 
 import static com.example.panappetit.Utils.Util.convertImageService;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,15 +32,15 @@ public class DetailFragment extends BaseFragment {
         TextView title = getCustomView().findViewById(R.id.tv_title_detail);
         name = getCustomView().findViewById(R.id.tv_name_detail);
         description = getCustomView().findViewById(R.id.tv_descript_detail);
-        count = getCustomView().findViewById(R.id.tv_title_count_detail);
+        count = getCustomView().findViewById(R.id.tv_count_detail);
         valor = getCustomView().findViewById(R.id.tv_valor_detail);
         delete = getCustomView().findViewById(R.id.btn_delete_section);
         update = getCustomView().findViewById(R.id.btn_update_section);
 
         if (getArguments() != null) {
-            Product product = getArguments().getParcelable("product");
-            if (product != null) {
-                this.product = product; // Show character details immediately
+            Product item = getArguments().getParcelable("product");
+            if (item != null) {
+                this.product = item; // Show character details immediately
             }
         }
         return getCustomView();
@@ -49,20 +50,24 @@ public class DetailFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         update.setOnClickListener(v->{
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("product", product);
+            Navigation.findNavController(requireView()).navigate(R.id.action_detailFragment_to_addUpdateFragment, bundle);
             Toast.makeText(getContext(), "update", Toast.LENGTH_SHORT).show();});
-        delete.setOnClickListener(v->{
-            Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show();});
-        arrow.setOnClickListener(v->{Navigation.findNavController(requireView()).navigateUp();});
+        delete.setOnClickListener(v->
+            Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show());
+        arrow.setOnClickListener(v->Navigation.findNavController(requireView()).navigateUp());
         completeProductData();
     }
 
+    @SuppressLint("SetTextI18n")
     private void completeProductData(){
         if (product != null){
             convertImageService(product.getImage(), image, 300);
             name.setText(product.getNombre());
-            description.setText(product.getNombre());
-            count.setText(product.getNombre());
-            valor.setText(product.getNombre());
+            description.setText(product.getDescripcion());
+            count.setText(product.getCantidad().toString());
+            valor.setText(product.getPrecio().toString());
         }
     }
 }
