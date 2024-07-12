@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.DetailFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Implementations.DetailFragment"
         android:label="DetailFragment">
         <argument
             android:name="product"
