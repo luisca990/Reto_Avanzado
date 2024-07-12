@@ -53,12 +53,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_title">
-        <SearchView
+        <EditText
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:queryHint="Filtra el pan que Buscas"
             android:textColor="@color/black"
+            android:padding="@dimen/_16dp"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@android:drawable/ic_menu_search"
             android:iconifiedByDefault="false" />
     </LinearLayout>
 

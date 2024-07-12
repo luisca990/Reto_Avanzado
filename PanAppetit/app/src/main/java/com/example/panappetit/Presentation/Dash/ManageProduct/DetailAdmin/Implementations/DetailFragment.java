@@ -58,9 +58,10 @@ public class DetailFragment extends BaseFragment {
             bundle.putParcelable("product", product);
             Navigation.findNavController(requireView()).navigate(R.id.action_detailFragment_to_addUpdateFragment, bundle);
             Toast.makeText(getContext(), "update", Toast.LENGTH_SHORT).show();});
-        delete.setOnClickListener(v->
-            Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show());
-        presenter.deleteProduct(product);
+        delete.setOnClickListener(v->{
+            Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show();
+            presenter.deleteProduct(product);
+        });
         arrow.setOnClickListener(v->Navigation.findNavController(requireView()).navigateUp());
         completeProductData();
     }
@@ -81,6 +82,7 @@ public class DetailFragment extends BaseFragment {
         public void showDeleteProduct(Boolean delete, String name) {
             if (delete){
                 dialogueFragment(R.string.delete_product, "Se elimino correctamente el producto: "+name, DialogueGenerico.TypeDialogue.OK);
+                Navigation.findNavController(requireView()).navigateUp();
             }else {
                 dialogueFragment(R.string.delete_product, "No se elimino correctamente el producto, hubo un error", DialogueGenerico.TypeDialogue.OK);
             }

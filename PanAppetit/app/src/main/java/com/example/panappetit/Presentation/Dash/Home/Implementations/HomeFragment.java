@@ -1,12 +1,13 @@
 package com.example.panappetit.Presentation.Dash.Home.Implementations;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
-//import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,7 +30,7 @@ public class HomeFragment extends BaseFragment {
     private SessionManager sessionManager;
     private List<Product> productsList;
     private RecyclerAdapterProducts adapter;
-    private SearchView search;
+    private EditText search;
     private ImageView logout;
     private FloatingActionButton fabAdd;
     private FloatingActionButton fabCar;
@@ -92,21 +93,25 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void textSearchProduct(){
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                if(newText.isEmpty()){
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().isEmpty()){
                     adapter.updateList(productsList);
                     hideKeyboardFragment();
-                    return false;
+                    return;
                 }
-                adapter.filter(newText);
-                return false;
+                adapter.filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
