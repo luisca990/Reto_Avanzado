@@ -8,7 +8,7 @@
     android:background="@color/grayBack"
     android:paddingTop="@dimen/_16dp"
     android:layout_gravity="center"
-    tools:context=".Presentation.Dash.ManageProduct.DetailAdmin.DetailFragment">
+    tools:context=".Presentation.Dash.ManageProduct.DetailAdmin.Implementations.DetailFragment">
 
     <LinearLayout
         android:id="@+id/ll_title"

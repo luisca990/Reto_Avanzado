@@ -1,4 +1,4 @@
-package com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin;
+package com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Implementations;
 
 import static com.example.panappetit.Utils.Util.convertImageService;
 
@@ -16,9 +16,12 @@ import androidx.navigation.Navigation;
 
 import com.example.panappetit.Base.BaseFragment;
 import com.example.panappetit.Models.Product;
+import com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Interfaces.IDetailView;
 import com.example.panappetit.R;
+import com.example.panappetit.Utils.DialogueGenerico;
 
 public class DetailFragment extends BaseFragment {
+    private DetailPresenter presenter;
     private Product product;
     private ImageView arrow, image;
     private TextView name, description, count, valor;
@@ -36,6 +39,7 @@ public class DetailFragment extends BaseFragment {
         valor = getCustomView().findViewById(R.id.tv_valor_detail);
         delete = getCustomView().findViewById(R.id.btn_delete_section);
         update = getCustomView().findViewById(R.id.btn_update_section);
+        presenter = new DetailPresenter(new listenerPresenter(),getContext());
 
         if (getArguments() != null) {
             Product item = getArguments().getParcelable("product");
@@ -56,6 +60,7 @@ public class DetailFragment extends BaseFragment {
             Toast.makeText(getContext(), "update", Toast.LENGTH_SHORT).show();});
         delete.setOnClickListener(v->
             Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show());
+        presenter.deleteProduct(product);
         arrow.setOnClickListener(v->Navigation.findNavController(requireView()).navigateUp());
         completeProductData();
     }
@@ -68,6 +73,17 @@ public class DetailFragment extends BaseFragment {
             description.setText(product.getDescripcion());
             count.setText(product.getCantidad().toString());
             valor.setText(product.getPrecio().toString());
+        }
+    }
+
+    private class listenerPresenter implements IDetailView{
+        @Override
+        public void showDeleteProduct(Boolean delete, String name) {
+            if (delete){
+                dialogueFragment(R.string.delete_product, "Se elimino correctamente el producto: "+name, DialogueGenerico.TypeDialogue.OK);
+            }else {
+                dialogueFragment(R.string.delete_product, "No se elimino correctamente el producto, hubo un error", DialogueGenerico.TypeDialogue.OK);
+            }
         }
     }
 }

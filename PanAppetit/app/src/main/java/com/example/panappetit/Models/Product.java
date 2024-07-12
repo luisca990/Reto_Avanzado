@@ -63,6 +63,7 @@ public class Product implements Parcelable {
     //Metodos de consumos SQlite
     public int insertProduct(ProductDao dao, Product product){return (int) dao.insertProduct(product);}
     public int updateProduct(ProductDao dao, Product product){return (int) dao.updateProduct(product);}
+    public Boolean deleteProduct(ProductDao dao){return dao.deleteProduct(id);}
     public static List<Product> getListProduct(ProductDao dao){
         return dao.getListProducts();
     }

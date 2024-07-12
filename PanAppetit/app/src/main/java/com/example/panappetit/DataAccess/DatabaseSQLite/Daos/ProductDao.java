@@ -64,7 +64,7 @@ public class ProductDao {
             return -1; // Indica que la actualización no se realizó correctamente
         }
     }
-    public boolean deleteProduct(long productId) {
+    public boolean deleteProduct(int productId) {
         // Verificación del ID del producto
         if (productId <= 0) {
             Log.e("Database", "ID del producto no válido.");

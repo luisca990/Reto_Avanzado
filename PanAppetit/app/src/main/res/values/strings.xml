@@ -57,5 +57,6 @@
     <string name="update_user">"Se actualizo correctamente el producto con el id: "</string>
     <string name="update_usuario">Actualizar Producto</string>
     <string name="save">Guardar</string>
+    <string name="delete_product">Eliminación</string>
 
 </resources>
