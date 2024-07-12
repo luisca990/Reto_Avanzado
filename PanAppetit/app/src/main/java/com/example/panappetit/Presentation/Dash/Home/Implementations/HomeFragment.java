@@ -1,23 +1,18 @@
 package com.example.panappetit.Presentation.Dash.Home.Implementations;
 
-import static com.example.panappetit.Utils.Util.hideKeyboard;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SearchView;
+//import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
-
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.panappetit.Base.BaseFragment;
-import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
 import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
-import com.example.panappetit.Models.MessageResponse;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Presentation.Dash.Home.Adapter.OnItemClickListenerProduct;
 import com.example.panappetit.Presentation.Dash.Home.Adapter.RecyclerAdapterProducts;
@@ -28,7 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class HomeFragment extends BaseFragment {
     private HomePresenter presenter;

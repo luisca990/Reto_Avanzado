@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.panappetit.DataAccess.DatabaseSQLite.DatabaseHelper;
 import com.example.panappetit.Models.Product;
@@ -63,7 +64,35 @@ public class ProductDao {
             return -1; // Indica que la actualización no se realizó correctamente
         }
     }
+    public boolean deleteProduct(long productId) {
+        // Verificación del ID del producto
+        if (productId <= 0) {
+            Log.e("Database", "ID del producto no válido.");
+            return false;
+        }
 
+        // Definición de la condición para la eliminación (en este caso, el ID del producto)
+        String selection = "id = ?";
+        String[] selectionArgs = {String.valueOf(productId)};
+
+        // Realización de la eliminación y obtención del número de filas afectadas
+        int count = -1;
+        try {
+            count = db.delete(TABLE_PRODUCTS, selection, selectionArgs);
+        } catch (Exception e) {
+            Log.e("Database", "Error al eliminar el producto: " + e.getMessage());
+            return false; // Indica que la eliminación no se realizó correctamente
+        }
+
+        // Si la eliminación fue exitosa, devolver true
+        if (count > 0) {
+            Log.d("Database", "Producto eliminado con ID: " + productId);
+            return true;
+        } else {
+            Log.e("Database", "No se eliminó ninguna fila para el producto con ID: " + productId);
+            return false; // Indica que la eliminación no se realizó correctamente
+        }
+    }
     // Método para obtener todos los productos de la tabla 'productos'
     public List<Product> getListProducts() {
         List<Product> productos = new ArrayList<>();

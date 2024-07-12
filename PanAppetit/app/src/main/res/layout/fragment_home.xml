@@ -44,17 +44,23 @@
             android:src="@mipmap/ic_logout"/>
     </LinearLayout>
 
-    <SearchView
-        android:id="@+id/searchView"
+    <LinearLayout
+        android:id="@+id/ll_searchView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_56dp"
-        android:layout_margin="@dimen/_16dp"
-        android:queryHint="Filtra el pan que Buscas"
         android:background="@drawable/border_search"
-        android:iconifiedByDefault="false"
+        android:layout_margin="@dimen/_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_title" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_title">
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:queryHint="Filtra el pan que Buscas"
+            android:textColor="@color/black"
+            android:iconifiedByDefault="false" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -66,7 +72,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView">
+        app:layout_constraintTop_toBottomOf="@+id/ll_searchView">
 
         <TextView
             android:id="@+id/tvSubTitle"
