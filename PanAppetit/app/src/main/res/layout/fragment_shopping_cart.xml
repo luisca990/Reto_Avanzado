@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/_16dp"
     android:paddingBottom="@dimen/_16dp"
     android:background="@color/blackyBack"
-    tools:context=".Presentation.Dash.ManageProduct.ShoppingCartFragment">
+    tools:context=".Presentation.Dash.ManageProduct.Shopping.ShoppingCartFragment">
 
     <LinearLayout
         android:id="@+id/ll_title"

@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.DetailFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Implementations.DetailFragment"
         android:label="DetailFragment">
         <argument
             android:name="product"
@@ -85,7 +85,7 @@
 
     <fragment
         android:id="@+id/detailClientFragment"
-        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailClientFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailClient.Implementations.DetailClientFragment"
         android:label="DetailClientFragment">
         <argument
             android:name="product"
@@ -95,7 +95,7 @@
 
     <fragment
         android:id="@+id/shoppingCartFragment"
-        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.ShoppingCartFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.Shopping.ShoppingCartFragment"
         android:label="ShoppingCartFragment"/>
 
 </navigation>

@@ -1,23 +1,19 @@
 package com.example.panappetit.Presentation.Dash.Home.Implementations;
 
-import static com.example.panappetit.Utils.Util.hideKeyboard;
-
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.Toast;
-
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.panappetit.Base.BaseFragment;
-import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
 import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
-import com.example.panappetit.Models.MessageResponse;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Presentation.Dash.Home.Adapter.OnItemClickListenerProduct;
 import com.example.panappetit.Presentation.Dash.Home.Adapter.RecyclerAdapterProducts;
@@ -28,14 +24,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class HomeFragment extends BaseFragment {
     private HomePresenter presenter;
     private SessionManager sessionManager;
     private List<Product> productsList;
     private RecyclerAdapterProducts adapter;
-    private SearchView search;
+    private EditText search;
     private ImageView logout;
     private FloatingActionButton fabAdd;
     private FloatingActionButton fabCar;
@@ -58,7 +53,6 @@ public class HomeFragment extends BaseFragment {
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false));
         rv.setAdapter(adapter);
-
         if (getArguments() != null) {
              typeUser = getArguments().getString(Constants.Tag.USER);
         }
@@ -88,6 +82,8 @@ public class HomeFragment extends BaseFragment {
     private void isVisibleButons() {
         if (!typeUser.equals(getString(R.string.admin))) {
             fabAdd.setVisibility(View.INVISIBLE);
+        }else {
+            fabCar.setVisibility(View.INVISIBLE);
         }
     }
     private void displaySesion(){
@@ -98,21 +94,25 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void textSearchProduct(){
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                if(newText.isEmpty()){
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().isEmpty()){
                     adapter.updateList(productsList);
                     hideKeyboardFragment();
-                    return false;
+                    return;
                 }
-                adapter.filter(newText);
-                return false;
+                adapter.filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -133,7 +133,7 @@ public class HomeFragment extends BaseFragment {
             if (typeUser.equals("admin")) {
                 Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailFragment, bundle);
             }else {
-                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment);
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment, bundle);
             }
         }
     }

@@ -3,11 +3,16 @@ package com.example.panappetit.DataAccess.SharedPreferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.panappetit.Models.Pedido;
+
 public class SessionManager {
     private static final String PREF_NAME = "SessionPref";
     private static final String IS_LOGGED_IN = "isLoggedIn";
     private static final String KEY_EMAIL = "correo";
     private static final String KEY_USER_ID = "userId";
+    private static final String KEY_VENTA_ID = "idVenta";
+    private static final String KEY_DATE = "date";
+    private static final String KEY_MONTO = "monto";
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Context context;
@@ -23,6 +28,21 @@ public class SessionManager {
         editor.putString(KEY_EMAIL, email);
         editor.putInt(KEY_USER_ID, userId);
         editor.commit();
+    }
+
+    public void setPedido(int id, String date, Float monto){
+        editor.putInt(KEY_VENTA_ID, id);
+        editor.putString(KEY_DATE, date);
+        editor.putFloat(KEY_MONTO, monto);
+        editor.commit();
+    }
+
+    public Float getMontoVenta() {
+        return pref.getFloat(KEY_MONTO, 0.0F);
+    }
+
+    public int getVentaId() {
+        return pref.getInt(KEY_VENTA_ID, 0);
     }
 
     public boolean isLoggedIn() {

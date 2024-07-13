@@ -8,7 +8,7 @@
     android:background="@color/grayBack"
     android:paddingTop="@dimen/_16dp"
     android:layout_gravity="center"
-    tools:context=".Presentation.Dash.ManageProduct.DetailAdmin.DetailFragment">
+    tools:context=".Presentation.Dash.ManageProduct.DetailAdmin.Implementations.DetailFragment">
 
     <LinearLayout
         android:id="@+id/ll_title"
@@ -26,7 +26,6 @@
             android:layout_height="@dimen/_80dp"
             android:src="@mipmap/ic_logo_return_purple"/>
         <TextView
-            android:id="@+id/tv_title_detail"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
@@ -120,13 +119,12 @@
                 tools:ignore="TextViewEdits" />
 
             <TextView
-                android:id="@+id/llAddCount"
+                android:id="@+id/tv_count_client"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8dp"
                 android:layout_marginBottom="@dimen/_25dp"
                 android:gravity="center"
-                android:text="$ 900"
                 android:textStyle="bold"
                 android:textColor="@color/purpleApp"
                 android:textSize="@dimen/_30sp"
@@ -184,9 +182,9 @@
                         android:layout_marginEnd="@dimen/_16dp"
                         android:src="@mipmap/ic_car_rest"/>
                     <TextView
+                        android:id="@+id/tv_count_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
                         android:textStyle="bold"
                         android:textColor="@color/white"
 
@@ -201,7 +199,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_add_car"
+                android:id="@+id/btn_add_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_25dp"
