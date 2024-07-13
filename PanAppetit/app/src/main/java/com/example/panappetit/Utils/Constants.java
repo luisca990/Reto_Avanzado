@@ -1,5 +1,10 @@
 package com.example.panappetit.Utils;
 
+import com.example.panappetit.Models.Product;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Constants {
     public static class Tag {
         public static final String LOGIN = "Login";
