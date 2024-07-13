@@ -1,4 +1,4 @@
-package com.example.panappetit.Presentation.Dash.ManageProduct;
+package com.example.panappetit.Presentation.Dash.ManageProduct.Shopping.Adapter;
 
 import com.example.panappetit.Models.Product;
 

@@ -53,7 +53,6 @@ public class HomeFragment extends BaseFragment {
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false));
         rv.setAdapter(adapter);
-
         if (getArguments() != null) {
              typeUser = getArguments().getString(Constants.Tag.USER);
         }
@@ -83,6 +82,8 @@ public class HomeFragment extends BaseFragment {
     private void isVisibleButons() {
         if (!typeUser.equals(getString(R.string.admin))) {
             fabAdd.setVisibility(View.INVISIBLE);
+        }else {
+            fabCar.setVisibility(View.INVISIBLE);
         }
     }
     private void displaySesion(){
@@ -132,7 +133,7 @@ public class HomeFragment extends BaseFragment {
             if (typeUser.equals("admin")) {
                 Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailFragment, bundle);
             }else {
-                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment);
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailClientFragment, bundle);
             }
         }
     }

@@ -58,5 +58,8 @@
     <string name="update_usuario">Actualizar Producto</string>
     <string name="save">Guardar</string>
     <string name="delete_product">Eliminación</string>
+    <string name="rest_cantidad">No se puede disminuir mas la cantidad</string>
+    <string name="cantidad">Cantidad Producto</string>
+    <string name="cantidad_cero">La cantidad debe ser diferente de cero</string>
 
 </resources>

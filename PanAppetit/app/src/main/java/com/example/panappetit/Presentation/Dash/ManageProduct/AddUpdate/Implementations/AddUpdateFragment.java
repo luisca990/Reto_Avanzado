@@ -64,11 +64,11 @@ public class AddUpdateFragment extends BaseFragment {
                     Integer.parseInt(count.getText().toString()),
                     url.getText().toString()
             );
-            item.setId(product.getId());
             if (product == null){
                 presenter.insertProduct(item);
                 return;
             }
+            item.setId(product.getId());
             product = item;
             presenter.updateProduct(item);
         });

@@ -1,0 +1,114 @@
+package com.example.panappetit.Presentation.Dash.ManageProduct.DetailClient.Implementations;
+
+import static com.example.panappetit.Utils.Util.convertImageService;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.navigation.Navigation;
+
+import com.example.panappetit.Base.BaseFragment;
+import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
+import com.example.panappetit.Models.Product;
+import com.example.panappetit.Models.Pedido;
+import com.example.panappetit.Presentation.Dash.ManageProduct.DetailClient.Interfaces.IDetailClientView;
+import com.example.panappetit.R;
+import com.example.panappetit.Utils.DialogueGenerico;
+
+import java.util.Date;
+
+public class DetailClientFragment extends BaseFragment {
+    private Product product;
+    private DetailClientPresenter presenter;
+    private SessionManager sessionManager;
+    private ImageView arrow, image, btnRest, btnAdd;
+    private TextView name, description, value, countValue;
+    private Button btnCart;
+    private int valueCount = 0;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setCustomView(inflater.inflate(R.layout.fragment_detail_client, container, false));
+        image = getCustomView().findViewById(R.id.iv_image_detail_client);
+        arrow = getCustomView().findViewById(R.id.iv_back_detail_client);
+        name = getCustomView().findViewById(R.id.tv_name_detail_client);
+        description = getCustomView().findViewById(R.id.tv_descript_detail_client);
+        value = getCustomView().findViewById(R.id.tv_count_client);
+        btnRest = getCustomView().findViewById(R.id.iv_rest_count);
+        countValue = getCustomView().findViewById(R.id.tv_count_value);
+        btnAdd = getCustomView().findViewById(R.id.iv_add_count);
+        btnCart = getCustomView().findViewById(R.id.btn_add_cart);
+
+        if (getArguments() != null) {
+            Product product = getArguments().getParcelable("product");
+            if (product != null) {
+                this.product = product; // Show product details immediately
+            }
+        }
+        sessionManager = new SessionManager(requireContext());
+        presenter = new DetailClientPresenter(new listenerPresenter(), getContext());
+        return getCustomView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        arrow.setOnClickListener(v-> Navigation.findNavController(requireView()).navigateUp());
+
+        btnRest.setOnClickListener(v->{
+            if(valueCount != 0){
+                valueCount--;
+                countValue.setText(String.valueOf(valueCount));
+                return;
+            }
+            Toast.makeText(requireContext(), getString(R.string.rest_cantidad), Toast.LENGTH_SHORT).show();
+        });
+
+        btnAdd.setOnClickListener(v->{
+            valueCount++;
+            countValue.setText(String.valueOf(valueCount));});
+
+        btnCart.setOnClickListener(v->{
+            if (valueCount == 0){
+                dialogueFragment(R.string.cantidad, getString(R.string.cantidad_cero), DialogueGenerico.TypeDialogue.ADVERTENCIA);
+                return;
+            }
+            float monto = product.getPrecio() + sessionManager.getMontoVenta();
+            Date date = new Date();
+            Pedido venta = new Pedido(sessionManager.getUseId(), date.toString(), monto, product, valueCount);
+            if (sessionManager.getVentaId() != 0){
+                venta.setId(sessionManager.getVentaId());
+                presenter.updateVenta(venta);
+                return;
+            }
+            presenter.insertVenta(venta);
+        });
+        completeProductData();
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void completeProductData(){
+        if (product != null){
+            convertImageService(product.getImage(), image, 300);
+            name.setText(product.getNombre());
+            description.setText(product.getDescripcion());
+            value.setText("$ "+product.getPrecio().toString());
+            countValue.setText(String.valueOf(valueCount));
+        }
+    }
+
+    private class listenerPresenter implements IDetailClientView{
+        @Override
+        public void showActionVenta(int id) {
+            Toast.makeText(getContext(), "Añadiste un producto al carrito", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(requireView()).navigateUp();
+        }
+    }
+}

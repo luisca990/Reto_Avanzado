@@ -1,4 +1,4 @@
-package com.example.panappetit.Presentation.Dash.ManageProduct;
+package com.example.panappetit.Presentation.Dash.ManageProduct.Shopping;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import androidx.navigation.Navigation;
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.panappetit.Base.BaseFragment;
 import com.example.panappetit.Models.Product;
-import com.example.panappetit.Presentation.Dash.Home.Adapter.OnItemClickListenerProduct;
-import com.example.panappetit.Presentation.Dash.Home.Adapter.RecyclerAdapterProducts;
-import com.example.panappetit.Presentation.Dash.Home.Implementations.HomeFragment;
+import com.example.panappetit.Presentation.Dash.ManageProduct.Shopping.Adapter.OnItemClickListenerShopping;
+import com.example.panappetit.Presentation.Dash.ManageProduct.Shopping.Adapter.RecyclerAdapterShopping;
 import com.example.panappetit.R;
 
 import java.util.ArrayList;
