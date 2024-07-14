@@ -68,8 +68,10 @@ public class ShoppingCartFragment extends BaseFragment {
                 productsList.addAll(pedido.getListProduct());
                 productsSelect.addAll(pedido.getListProduct());
                 adapter.updateList(productsList);
-                total = pedido.getMontoTotal();
-                monto.setText(getString(R.string.monto_total)+String.valueOf(total));
+                for (Product item : productsList){
+                    total += item.getPrecio() * item.getProductCantidad();
+                }
+                monto.setText(getString(R.string.monto_total)+ total);
             }
         }
 
