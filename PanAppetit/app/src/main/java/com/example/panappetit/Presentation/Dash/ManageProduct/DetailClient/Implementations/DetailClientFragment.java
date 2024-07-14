@@ -80,15 +80,16 @@ public class DetailClientFragment extends BaseFragment {
                 dialogueFragment(R.string.cantidad, getString(R.string.cantidad_cero), DialogueGenerico.TypeDialogue.ADVERTENCIA);
                 return;
             }
-            float monto = product.getPrecio() + sessionManager.getMontoVenta();
+            float monto = (valueCount*product.getPrecio()) + sessionManager.getMontoPedido();
             Date date = new Date();
-            Pedido venta = new Pedido(sessionManager.getUseId(), date.toString(), monto, product, valueCount);
-            if (sessionManager.getVentaId() != 0){
-                venta.setId(sessionManager.getVentaId());
-                presenter.updateVenta(venta);
+            product.setProductCantidad(valueCount);
+            Pedido pedido = new Pedido(sessionManager.getUseId(), date.toString(), monto, product);
+            if (sessionManager.getPedidoId() != 0){
+                pedido.setId(sessionManager.getPedidoId());
+                presenter.updateVenta(pedido);
                 return;
             }
-            presenter.insertVenta(venta);
+            presenter.insertVenta(pedido);
         });
         completeProductData();
     }
@@ -106,9 +107,14 @@ public class DetailClientFragment extends BaseFragment {
 
     private class listenerPresenter implements IDetailClientView{
         @Override
-        public void showActionVenta(int id) {
+        public void showActionPedido(int id) {
             Toast.makeText(getContext(), "Añadiste un producto al carrito", Toast.LENGTH_SHORT).show();
             Navigation.findNavController(requireView()).navigateUp();
+        }
+
+        @Override
+        public void showDialogAdvertence(int title, String message, DialogueGenerico.TypeDialogue type) {
+            dialogueFragment(title, message, type);
         }
     }
 }

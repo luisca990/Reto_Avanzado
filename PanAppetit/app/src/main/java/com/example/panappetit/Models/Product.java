@@ -18,6 +18,8 @@ public class Product implements Parcelable {
     private final Float precio;
     private final Integer cantidad;
     private final String image;
+    private Boolean selected = true;
+    private Integer productCantidad;
 
     public Product(String nombre, String descripcion, Float precio, Integer cantidad, String image) {
         this.nombre = nombre;
@@ -59,6 +61,18 @@ public class Product implements Parcelable {
     public void setId(int id) {
         this.id = id;
     }
+    public int getProductCantidad() {
+        return productCantidad;
+    }
+    public void setProductCantidad(int productCantidad) {
+        this.productCantidad = productCantidad;
+    }
+    public Boolean getSelected() {
+        return selected;
+    }
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
+    }
 
     //Metodos de consumos SQlite
     public int insertProduct(ProductDao dao, Product product){return (int) dao.insertProduct(product);}
@@ -76,6 +90,8 @@ public class Product implements Parcelable {
         cantidad = in.readInt();
         precio = in.readFloat();
         image = in.readString();
+        productCantidad = in.readInt();
+        selected = in.readBoolean();
     }
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
@@ -100,5 +116,7 @@ public class Product implements Parcelable {
         parcel.writeInt(cantidad);
         parcel.writeFloat(precio);
         parcel.writeString(image);
+        parcel.writeInt(productCantidad);
+        parcel.writeBoolean(selected);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.panappetit.Presentation.Dash.ManageProduct.Shopping.Adapter;
+package com.example.panappetit.Presentation.Dash.ManageVenta.History.Adapter;
 
 import static com.example.panappetit.Utils.Util.convertImageService;
 
@@ -9,29 +9,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.panappetit.Models.Product;
+import com.example.panappetit.Models.Venta;
+import com.example.panappetit.Presentation.Dash.ManageProduct.History.Adapter.OnItemClickListenerHistory;
 import com.example.panappetit.R;
 
 import java.util.List;
 
-public class RecyclerAdapterShopping extends RecyclerView.Adapter<RecyclerAdapterShopping.ViewHolder> {
+public class RecyclerAdapterHistorial extends RecyclerView.Adapter<RecyclerAdapterHistorial.ViewHolder> {
 
-    private List<Product> products;
+    private List<Venta> ventas;
     private final Context context;
-    private final OnItemClickListenerShopping listener;
+    private final OnItemClickListenerHistory listener;
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateList(List<Product> products) {
-        this.products = products;
+    public void updateList(List<Venta> ventas) {
+        this.ventas = ventas;
         notifyDataSetChanged();
     }
 
-    public RecyclerAdapterShopping(Context context, List<Product> products, OnItemClickListenerShopping listener) {
-        this.products = products;
+    public RecyclerAdapterHistorial(Context context, List<Venta> ventas, OnItemClickListenerHistory listener) {
+        this.ventas = ventas;
         this.context = context;
         this.listener = listener;
     }
@@ -46,12 +46,12 @@ public class RecyclerAdapterShopping extends RecyclerView.Adapter<RecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setDetailCategoria(products.get(position));
+        holder.setDetailCategoria(ventas.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return ventas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -72,23 +72,16 @@ public class RecyclerAdapterShopping extends RecyclerView.Adapter<RecyclerAdapte
             cantidad = itemView.findViewById(R.id.tv_item_cantidad);
         }
         @SuppressLint("SetTextI18n")
-        void setDetailCategoria(Product product){
-            name.setText(product.getNombre());
-            precio.setText(product.getPrecio().toString());
-            cantidad.setText(String.valueOf(product.getProductCantidad()));
-            convertImageService(product.getImage(), imageView, 150);
-            changeSelectedShopping(product.getSelected());
-            select.setOnClickListener(v -> {
-                listener.onItemClickSelect(product);
+        void setDetailCategoria(Venta venta){
+            name.setText("IdPedido: "+venta.getId());
+            precio.setText("Cantidad de Productos: "+venta.getListProduct().size());
+            cantidad.setText("Valor Total: "+ venta.getMontoTotal());
+            convertImageService(venta.getListProduct().get(0).getImage(), imageView, 150);
+            select.setVisibility(View.GONE);
+            delete.setVisibility(View.GONE);
+            imageView.setOnClickListener(v -> {
+                listener.onItemClick(venta);
             });
-            delete.setOnClickListener(v -> listener.onItemClickDelete(product));
-        }
-        private void changeSelectedShopping(Boolean change){
-            if (change) {
-                select.setImageResource(R.mipmap.ic_select_cart_purple);
-            } else {
-                select.setImageResource(R.mipmap.ic_select_cart_gray);
-            }
         }
     }
 }

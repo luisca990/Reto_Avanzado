@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">PanAppetit</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancel">Cancelar</string>
     <string name="informative">Informativo</string>
@@ -61,5 +58,12 @@
     <string name="rest_cantidad">No se puede disminuir mas la cantidad</string>
     <string name="cantidad">Cantidad Producto</string>
     <string name="cantidad_cero">La cantidad debe ser diferente de cero</string>
+    <string name="el_usuario">"El usuario "</string>
+    <string name="se_deslogueo">" se deslogueo"</string>
+    <string name="no_shopping">No tienes ningun producto en el carrito de compras</string>
+    <string name="monto_total">"Monto Total: "</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="history">Historial de Pedidos</string>
 
 </resources>

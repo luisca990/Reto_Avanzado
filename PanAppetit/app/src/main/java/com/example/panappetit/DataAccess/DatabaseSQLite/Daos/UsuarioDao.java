@@ -5,8 +5,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import static com.example.panappetit.Utils.Constants.TABLE_USUARIOS;
 import com.example.panappetit.DataAccess.DatabaseSQLite.DatabaseHelper;
+import com.example.panappetit.Models.Pedido;
 import com.example.panappetit.Models.User;
 
 public class UsuarioDao {
@@ -40,6 +43,7 @@ public class UsuarioDao {
             return db.insert(TABLE_USUARIOS, null, values);
         }
     }
+
     @SuppressLint("Range")
     public long getUserIdByEmail(String email) {
         long userId = -1;
@@ -54,5 +58,26 @@ public class UsuarioDao {
         }
         // Cierra el cursor
         return userId;
+    }
+
+    public Pedido getPedidoIdByUsuarioId(Long usuarioId) {
+        Pedido pedido = null;
+        String query = "SELECT p.id, p.usuario_id, p.fecha_pedido, p.monto_total FROM pedidos AS p WHERE usuario_id = ? LIMIT 1";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(usuarioId)});
+
+        if (cursor.moveToFirst()) {
+            int pedidoId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            int userId = cursor.getInt(cursor.getColumnIndexOrThrow("usuario_id"));
+            String fechaPedido = cursor.getString(cursor.getColumnIndexOrThrow("fecha_pedido"));
+            float montoTotal = cursor.getFloat(cursor.getColumnIndexOrThrow("monto_total"));
+
+            pedido = new Pedido(pedidoId, userId, fechaPedido, montoTotal);
+        } else {
+            Log.d("Database", "No pedido found for usuario_id: " + usuarioId);
+        }
+
+        cursor.close();
+        return pedido;
     }
 }

@@ -46,7 +46,16 @@
                 android:id="@+id/tv_item_precio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_25dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_item_cantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
                 android:text="@string/app_name"
                 android:textColor="@color/black"
                 android:textStyle="bold" />

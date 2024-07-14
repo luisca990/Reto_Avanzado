@@ -17,7 +17,9 @@ public class Constants {
     public static final String TABLE_PRODUCTS = "productos";
     public static final String TABLE_USUARIOS = "usuarios";
     public static final String TABLE_PEDIDOS = "pedidos";
+    public static final String TABLE_VENTA = "venta";
     public static final String TABLE_DETALLES = "detalles_pedido";
+    public static final String TABLE_DETALLES_VENTA = "detalles_venta";
 
     // Query Tablas
     public static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE " + TABLE_PRODUCTS + "("
@@ -39,6 +41,12 @@ public class Constants {
             + "monto_total REAL NOT NULL,"
             + "FOREIGN KEY (usuario_id) REFERENCES usuarios(id)"
             + ")";
+    public static final String CREATE_TABLE_VENTA = "CREATE TABLE " + TABLE_VENTA + "("
+            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "usuario_id INTEGER NOT NULL,"
+            + "monto_total REAL NOT NULL,"
+            + "FOREIGN KEY (usuario_id) REFERENCES usuarios(id)"
+            + ")";
     public static final String CREATE_TABLE_DETALLES = "CREATE TABLE " + TABLE_DETALLES + "("
             + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "pedido_id INTEGER NOT NULL,"
@@ -46,6 +54,14 @@ public class Constants {
             + "cantidad INTEGER NOT NULL,"
             + "precio REAL NOT NULL,"
             + "FOREIGN KEY (pedido_id) REFERENCES pedidos(id),"
+            + "FOREIGN KEY (producto_id) REFERENCES productos(id)"
+            + ")";
+    public static final String CREATE_TABLE_DETALLES_VENTA = "CREATE TABLE " + TABLE_DETALLES_VENTA + "("
+            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "venta_id INTEGER NOT NULL,"
+            + "producto_id INTEGER NOT NULL,"
+            + "cantidad INTEGER NOT NULL,"
+            + "FOREIGN KEY (venta_id) REFERENCES venta(id),"
             + "FOREIGN KEY (producto_id) REFERENCES productos(id)"
             + ")";
 }

@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/_16dp"
     android:paddingBottom="@dimen/_16dp"
     android:background="@color/blackyBack"
-    tools:context=".Presentation.Dash.ManageProduct.Shopping.ShoppingCartFragment">
+    tools:context=".Presentation.Dash.ManageProduct.Shopping.Implementations.ShoppingCartFragment">
 
     <LinearLayout
         android:id="@+id/ll_title"
@@ -40,19 +40,40 @@
             android:src="@mipmap/ic_logo_back_white"/>
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkbox_shopping"
+    <LinearLayout
+        android:id="@+id/ll_checkbox_shopping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16sp"
-        android:checked="true"
-        android:layout_margin="@dimen/_16dp"
-        android:buttonTint="@color/purpleApp"
-        android:text="@string/seleccionar_todo"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_title"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_title">
+
+        <CheckBox
+            android:id="@+id/checkbox_shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sp"
+            android:checked="true"
+            android:layout_marginStart="@dimen/_16dp"
+            android:buttonTint="@color/purpleApp"
+            android:text="@string/seleccionar_todo"/>
+
+        <TextView
+            android:id="@+id/tv_monto_shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_16dp"
+            android:text="@string/monto_total"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_shopping"
@@ -62,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_shopping"
-        app:layout_constraintTop_toBottomOf="@id/checkbox_shopping"/>
+        app:layout_constraintTop_toBottomOf="@id/ll_checkbox_shopping"/>
 
     <Button
         android:id="@+id/btn_shopping"

@@ -1,13 +1,16 @@
 package com.example.panappetit.DataAccess.DatabaseSQLite;
 
 import static com.example.panappetit.Utils.Constants.CREATE_TABLE_DETALLES;
+import static com.example.panappetit.Utils.Constants.CREATE_TABLE_DETALLES_VENTA;
 import static com.example.panappetit.Utils.Constants.CREATE_TABLE_PEDIDOS;
 import static com.example.panappetit.Utils.Constants.CREATE_TABLE_PRODUCTS;
 import static com.example.panappetit.Utils.Constants.CREATE_TABLE_USUARIOS;
+import static com.example.panappetit.Utils.Constants.CREATE_TABLE_VENTA;
 import static com.example.panappetit.Utils.Constants.TABLE_DETALLES;
 import static com.example.panappetit.Utils.Constants.TABLE_PEDIDOS;
 import static com.example.panappetit.Utils.Constants.TABLE_PRODUCTS;
 import static com.example.panappetit.Utils.Constants.TABLE_USUARIOS;
+import static com.example.panappetit.Utils.Constants.TABLE_VENTA;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -28,6 +31,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_PRODUCTS);
         db.execSQL(CREATE_TABLE_USUARIOS);
+        db.execSQL(CREATE_TABLE_VENTA);
+        db.execSQL(CREATE_TABLE_DETALLES_VENTA);
         db.execSQL(CREATE_TABLE_PEDIDOS);
         db.execSQL(CREATE_TABLE_DETALLES);
         insertDefaultProducts(db);
@@ -37,6 +42,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_DETALLES);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_PEDIDOS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_PEDIDOS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_VENTA);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_USUARIOS);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_PRODUCTS);
         onCreate(db);
