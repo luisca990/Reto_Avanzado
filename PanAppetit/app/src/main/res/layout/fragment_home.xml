@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:layout_marginTop="@dimen/_16dp"
+    android:paddingBottom="@dimen/_16dp"
     tools:context=".Presentation.Dash.Home.Implementations.HomeFragment">
 
     <LinearLayout
@@ -111,20 +112,55 @@
         android:layout_marginBottom="@dimen/_25dp"
         android:layout_marginEnd="@dimen/_25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fab_buy" />
+        app:layout_constraintBottom_toTopOf="@id/rl_fabShopping" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_buy"
+        android:id="@+id/fab_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:importantForAccessibility="no"
-        android:src="@mipmap/ic_input_buy"
+        android:src="@mipmap/ic_history"
         app:fabSize="mini"
         style="@style/CustomFAB"
         app:backgroundTint="@color/grayBack"
+        android:layout_marginBottom="@dimen/_25dp"
+        android:layout_marginEnd="@dimen/_25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rl_fabShopping" />
+
+    <RelativeLayout
+        android:id="@+id/rl_fabShopping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_16dp"
         android:layout_marginEnd="@dimen/_25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/ic_input_buy"
+            app:fabSize="mini"
+            style="@style/CustomFAB"
+            app:backgroundTint="@color/grayBack"/>
+
+        <TextView
+            android:id="@+id/notification_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fab_buy"
+            android:layout_alignStart="@+id/fab_buy"
+            android:background="@drawable/badge_background"
+            android:elevation="10dp"
+            android:padding="4dp"
+            android:text="50"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,8 +3,6 @@ package com.example.panappetit.DataAccess.SharedPreferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.panappetit.Models.Pedido;
-
 public class SessionManager {
     private static final String PREF_NAME = "SessionPref";
     private static final String IS_LOGGED_IN = "isLoggedIn";
@@ -37,11 +35,16 @@ public class SessionManager {
         editor.commit();
     }
 
-    public Float getMontoVenta() {
+    public void setMonto(Float monto){
+        editor.putFloat(KEY_MONTO, monto);
+        editor.commit();
+    }
+
+    public Float getMontoPedido() {
         return pref.getFloat(KEY_MONTO, 0.0F);
     }
 
-    public int getVentaId() {
+    public int getPedidoId() {
         return pref.getInt(KEY_VENTA_ID, 0);
     }
 

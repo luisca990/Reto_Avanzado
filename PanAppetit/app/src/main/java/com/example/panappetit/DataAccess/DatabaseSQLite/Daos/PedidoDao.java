@@ -67,6 +67,9 @@ public class PedidoDao {
 
         // Si la actualización fue exitosa, devolver el ID del pedido
         if (count > 0) {
+            SessionManager sessionManager = new SessionManager(context);
+            pedido.setId(pedido.getId());
+            sessionManager.setPedido(pedido.getId(), pedido.getDate(), pedido.getMontoTotal());
             return insertDetallePedido(pedido, (long) pedido.getId());
         } else {
             return -1; // Indica que la actualización no se realizó correctamente
@@ -76,67 +79,66 @@ public class PedidoDao {
         ContentValues values = new ContentValues(); // Objeto para almacenar los valores a insertar
         values.put("pedido_id", pedidoId); // Inserción del pedidoID del DetallePedido
         values.put("producto_id", pedido.getProduct().getId());
-        values.put("cantidad", pedido.getProductCantidad());
+        values.put("cantidad", pedido.getProduct().getProductCantidad());
         values.put("precio", pedido.getProduct().getPrecio());
 
         return db.insert(TABLE_DETALLES, null, values);
     }
     public Pedido getLastPedidoByUserId(int userId) {
         Pedido pedido = null;
-        String query = "SELECT " +
+        // Primero obtenemos el ID del último pedido del usuario
+        String queryPedido = "SELECT " +
                 "p.id AS pedido_id, " +
                 "p.fecha_pedido, " +
-                "p.monto_total, " +
-                "d.cantidad, " +
-                "d.precio AS detalle_precio, " +
-                "pr.id AS producto_id, " +
-                "pr.nombre, " +
-                "pr.descripcion, " +
-                "pr.precio AS producto_precio, " +
-                "pr.cantidad_stock, " +
-                "pr.imagen " +
+                "p.monto_total " +
                 "FROM pedidos p " +
-                "JOIN detalles d ON p.id = d.pedido_id " +
-                "JOIN productos pr ON d.producto_id = pr.id " +
                 "WHERE p.usuario_id = ? " +
                 "ORDER BY p.fecha_pedido DESC " +
                 "LIMIT 1";
 
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
+        Cursor cursorPedido = db.rawQuery(queryPedido, new String[]{String.valueOf(userId)});
+        if (cursorPedido.moveToFirst()) {
+            int pedidoId = cursorPedido.getInt(cursorPedido.getColumnIndexOrThrow("pedido_id"));
+            String fechaPedido = cursorPedido.getString(cursorPedido.getColumnIndexOrThrow("fecha_pedido"));
+            float montoTotal = cursorPedido.getFloat(cursorPedido.getColumnIndexOrThrow("monto_total"));
 
-//        if (cursor.moveToFirst()) {
-//            int pedidoId = cursor.getInt(cursor.getColumnIndexOrThrow("pedido_id"));
-//            String fechaPedido = cursor.getString(cursor.getColumnIndexOrThrow("fecha_pedido"));
-//            float montoTotal = cursor.getFloat(cursor.getColumnIndexOrThrow("monto_total"));
-//
-//            // Crear el pedido
-//            pedido = new Pedido(pedidoId, userId, fechaPedido, montoTotal);
-//
-//            do {
-//                int cantidad = cursor.getInt(cursor.getColumnIndexOrThrow("cantidad"));
-//                float detallePrecio = cursor.getFloat(cursor.getColumnIndexOrThrow("detalle_precio"));
-//
-//                int productoId = cursor.getInt(cursor.getColumnIndexOrThrow("producto_id"));
-//                String nombreProducto = cursor.getString(cursor.getColumnIndexOrThrow("nombre"));
-//                String descripcionProducto = cursor.getString(cursor.getColumnIndexOrThrow("descripcion"));
-//                float productoPrecio = cursor.getFloat(cursor.getColumnIndexOrThrow("producto_precio"));
-//                int cantidadStock = cursor.getInt(cursor.getColumnIndexOrThrow("cantidad_stock"));
-//                String imagen = cursor.getString(cursor.getColumnIndexOrThrow("imagen"));
-//
-//                // Crear producto
-//                Product product = new Product(productoId, nombreProducto, descripcionProducto, productoPrecio, cantidadStock, imagen);
-//                product.setCantidad(cantidad);
-//
-//                // Agregar el producto al pedido
-//                pedido.addProduct(product, cantidad);
-//
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
+            // Crear el pedido
+            pedido = new Pedido(pedidoId, userId, fechaPedido, montoTotal);
+            // Ahora obtenemos todos los detalles del pedido y los productos relacionados
+            String queryDetalles = "SELECT " +
+                    "d.cantidad, " +
+                    "d.precio AS detalle_precio, " +
+                    "pr.id AS producto_id, " +
+                    "pr.nombre, " +
+                    "pr.descripcion, " +
+                    "pr.precio AS producto_precio, " +
+                    "pr.cantidad_stock, " +
+                    "pr.imagen " +
+                    "FROM detalles_pedido d " +
+                    "JOIN productos pr ON d.producto_id = pr.id " +
+                    "WHERE d.pedido_id = ?";
+            Cursor cursorDetalles = db.rawQuery(queryDetalles, new String[]{String.valueOf(pedidoId)});
+
+            while (cursorDetalles.moveToNext()) {
+                int cantidad = cursorDetalles.getInt(cursorDetalles.getColumnIndexOrThrow("cantidad"));
+                int productoId = cursorDetalles.getInt(cursorDetalles.getColumnIndexOrThrow("producto_id"));
+                String nombreProducto = cursorDetalles.getString(cursorDetalles.getColumnIndexOrThrow("nombre"));
+                String descripcionProducto = cursorDetalles.getString(cursorDetalles.getColumnIndexOrThrow("descripcion"));
+                float productoPrecio = cursorDetalles.getFloat(cursorDetalles.getColumnIndexOrThrow("producto_precio"));
+                int cantidadStock = cursorDetalles.getInt(cursorDetalles.getColumnIndexOrThrow("cantidad_stock"));
+                String imagen = cursorDetalles.getString(cursorDetalles.getColumnIndexOrThrow("imagen"));
+
+                // Crear producto
+                Product product = new Product(nombreProducto, descripcionProducto, productoPrecio, cantidadStock, imagen);
+                product.setId(productoId);
+                product.setProductCantidad(cantidad);
+
+                // Agregar el producto al pedido
+                pedido.settListProduct(product);
+            }
+            cursorDetalles.close();
+        }
+        cursorPedido.close();
         return pedido;
-    }
-    public List<Pedido> getListPedidos() {
-        List<Pedido> pedidos = new ArrayList<>();
-        return pedidos;
     }
 }

@@ -11,6 +11,7 @@ import com.example.panappetit.DataAccess.Repositories.RepoLogin;
 import com.example.panappetit.DataAccess.Services;
 import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
 import com.example.panappetit.Models.MessageResponse;
+import com.example.panappetit.Models.Pedido;
 import com.example.panappetit.Models.User;
 import com.example.panappetit.Presentation.AccessAcount.Login.Interfaces.ILoginBL;
 import com.example.panappetit.Presentation.AccessAcount.Login.Interfaces.ILoginListener;
@@ -44,6 +45,8 @@ public class LoginBL implements ILoginBL {
                 User user = (User) objectResponse;
                 listener.responseLogin(user);
                 long userID = dao.insertUser(user);
+                Pedido pedido = dao.getPedidoIdByUsuarioId(userID);
+                if (pedido != null) sessionManager.setPedido(pedido.getId(), pedido.getDate(), pedido.getMontoTotal());
                 sessionManager.createLoginSession(user.getEmail(), (int) userID);
                 dao.closeDb();
             }
@@ -53,7 +56,6 @@ public class LoginBL implements ILoginBL {
         public void onFailedResponse(MessageResponse response, Services services) {
             if (services == Services.LOGIN) {
                 listener.credentialsIncorrect();
-                dao.closeDb();
             }
         }
     }

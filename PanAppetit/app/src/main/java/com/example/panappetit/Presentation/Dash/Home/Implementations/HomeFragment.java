@@ -8,18 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.panappetit.Base.BaseFragment;
 import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
+import com.example.panappetit.Models.Pedido;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Presentation.Dash.Home.Adapter.OnItemClickListenerProduct;
 import com.example.panappetit.Presentation.Dash.Home.Adapter.RecyclerAdapterProducts;
 import com.example.panappetit.Presentation.Dash.Home.Interfaces.IHomeView;
 import com.example.panappetit.R;
 import com.example.panappetit.Utils.Constants;
+import com.example.panappetit.Utils.DialogueGenerico;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,10 +34,11 @@ public class HomeFragment extends BaseFragment {
     private List<Product> productsList;
     private RecyclerAdapterProducts adapter;
     private EditText search;
+    private TextView shopping;
     private ImageView logout;
-    private FloatingActionButton fabAdd;
-    private FloatingActionButton fabCar;
+    private FloatingActionButton fabAdd, fabCar, fabHistory;
     private String typeUser;
+    private Pedido cartPedido = new Pedido();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class HomeFragment extends BaseFragment {
         logout = getCustomView().findViewById(R.id.iv_logout);
         fabAdd = getCustomView().findViewById(R.id.fab_add);
         fabCar = getCustomView().findViewById(R.id.fab_buy);
+        fabHistory = getCustomView().findViewById(R.id.fab_history);
+        shopping = getCustomView().findViewById(R.id.notification_badge);
         presenter = new HomePresenter(new listenerPresenter(), getContext());
         sessionManager = new SessionManager(requireContext());
 
@@ -67,16 +73,26 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         presenter.getAllProductsSuccess();
+        presenter.getLastPedidoByUserId(sessionManager.getUseId());
         logout.setOnClickListener(v -> {
             sessionManager.logout();
-            Toast.makeText(getContext(), "El usuario "+sessionManager.getUserEmail()+" se deslogueo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.el_usuario)+sessionManager.getUserEmail()+getString(R.string.se_deslogueo), Toast.LENGTH_SHORT).show();
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_loginFragment);
         });
         fabAdd.setOnClickListener(v->{
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_addUpdateFragment);
         });
         fabCar.setOnClickListener(v->{
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_shoppingCartFragment);
+            if(cartPedido.getListProduct().isEmpty()){
+                dialogueFragment(R.string.shopping, getString(R.string.no_shopping), DialogueGenerico.TypeDialogue.ADVERTENCIA);
+                return;
+            }
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("pedido", cartPedido);
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_shoppingCartFragment, bundle);
+        });
+        fabHistory.setOnClickListener(v->{
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_historyFragment);
         });
     }
     private void isVisibleButons() {
@@ -84,6 +100,7 @@ public class HomeFragment extends BaseFragment {
             fabAdd.setVisibility(View.INVISIBLE);
         }else {
             fabCar.setVisibility(View.INVISIBLE);
+            fabHistory.setVisibility(View.INVISIBLE);
         }
     }
     private void displaySesion(){
@@ -92,7 +109,6 @@ public class HomeFragment extends BaseFragment {
             Toast.makeText(getContext(), "El usuario " + sessionManager.getUserEmail() + " no esta logueado", Toast.LENGTH_SHORT).show();
         }
     }
-
     private void textSearchProduct(){
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -116,12 +132,22 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
-
     private class listenerPresenter implements IHomeView{
         @Override
         public void showGetAllProductsSuccess(List<Product> products) {
             productsList = products;
             adapter.updateList(products);
+        }
+
+        @Override
+        public void showGetLastPedidoSuccess(Pedido pedido) {
+            if (pedido == null || pedido.getListProduct().isEmpty()){
+                shopping.setVisibility(View.INVISIBLE);
+            }else {
+                cartPedido = pedido;
+                shopping.setVisibility(View.VISIBLE);
+                shopping.setText(String.valueOf(pedido.getListProduct().size()));
+            }
         }
     }
 
