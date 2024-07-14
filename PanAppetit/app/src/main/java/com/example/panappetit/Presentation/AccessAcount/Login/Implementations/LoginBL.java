@@ -53,7 +53,6 @@ public class LoginBL implements ILoginBL {
         public void onFailedResponse(MessageResponse response, Services services) {
             if (services == Services.LOGIN) {
                 listener.credentialsIncorrect();
-                dao.closeDb();
             }
         }
     }
