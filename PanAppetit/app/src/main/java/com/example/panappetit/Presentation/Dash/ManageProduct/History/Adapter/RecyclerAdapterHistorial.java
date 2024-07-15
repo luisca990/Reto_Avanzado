@@ -1,4 +1,4 @@
-package com.example.panappetit.Presentation.Dash.ManageVenta.History.Adapter;
+package com.example.panappetit.Presentation.Dash.ManageProduct.History.Adapter;
 
 import static com.example.panappetit.Utils.Util.convertImageService;
 
@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.panappetit.Models.Venta;
-import com.example.panappetit.Presentation.Dash.ManageProduct.History.Adapter.OnItemClickListenerHistory;
 import com.example.panappetit.R;
 
 import java.util.List;
@@ -55,7 +54,6 @@ public class RecyclerAdapterHistorial extends RecyclerView.Adapter<RecyclerAdapt
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private Boolean status = false;
         private final ImageView imageView;
         private final ImageView select;
         private final ImageView delete;
@@ -76,12 +74,10 @@ public class RecyclerAdapterHistorial extends RecyclerView.Adapter<RecyclerAdapt
             name.setText("IdPedido: "+venta.getId());
             precio.setText("Cantidad de Productos: "+venta.getListProduct().size());
             cantidad.setText("Valor Total: "+ venta.getMontoTotal());
-            convertImageService(venta.getListProduct().get(0).getImage(), imageView, 150);
+            if (venta.getListProduct() != null && !venta.getListProduct().isEmpty())convertImageService(venta.getListProduct().get(0).getImage(), imageView, 150);
             select.setVisibility(View.GONE);
             delete.setVisibility(View.GONE);
-            imageView.setOnClickListener(v -> {
-                listener.onItemClick(venta);
-            });
+            imageView.setOnClickListener(v -> listener.onItemClick(venta));
         }
     }
 }

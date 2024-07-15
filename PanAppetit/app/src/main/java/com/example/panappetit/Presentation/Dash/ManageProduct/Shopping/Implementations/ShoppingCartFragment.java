@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.panappetit.Base.BaseFragment;
+import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.VentaDao;
 import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
 import com.example.panappetit.Models.Pedido;
 import com.example.panappetit.Models.Product;
@@ -36,10 +37,11 @@ public class ShoppingCartFragment extends BaseFragment {
     private CheckBox checkBox;
     private Button shop;
     private RecyclerAdapterShopping adapter;
-    private List<Product> productsList = new ArrayList<>();
+    private final List<Product> productsList = new ArrayList<>();
     private List<Product> productsSelect = new ArrayList<>();
     private Pedido pedido;
     private float total = 0.0F;
+    private VentaDao dao;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -52,7 +54,8 @@ public class ShoppingCartFragment extends BaseFragment {
         monto = getCustomView().findViewById(R.id.tv_monto_shopping);
         RecyclerView rv = getCustomView().findViewById(R.id.rv_shopping);
 
-        presenter = new ShoppingPresenter(new listenerPresenter(), getContext());
+        dao = new VentaDao(getContext());
+        presenter = new ShoppingPresenter(new listenerPresenter(), getContext(), dao);
 
         adapter = new RecyclerAdapterShopping(getContext(), productsList, new listenerAdapter());
         rv.setHasFixedSize(true);
@@ -62,7 +65,7 @@ public class ShoppingCartFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             // Obtener el objeto Pedido
-            pedido = bundle.getParcelable("pedido");
+            pedido = bundle.getParcelable("pedido", Pedido.class);
             // Usar el objeto Pedido
             if (pedido != null) {
                 productsList.addAll(pedido.getListProduct());
@@ -81,7 +84,7 @@ public class ShoppingCartFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        arrow.setOnClickListener(v->{Navigation.findNavController(requireView()).navigateUp();});
+        arrow.setOnClickListener(v-> Navigation.findNavController(requireView()).navigateUp());
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // El CheckBox está seleccionado
@@ -180,5 +183,10 @@ public class ShoppingCartFragment extends BaseFragment {
         public void showDialogAdvertence(int title, String message, DialogueGenerico.TypeDialogue type) {
             dialogueFragment(title, message, type);
         }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dao.closeDb();
     }
 }
