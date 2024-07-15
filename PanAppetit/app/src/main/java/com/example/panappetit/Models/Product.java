@@ -13,11 +13,11 @@ import java.util.List;
 public class Product implements Parcelable {
 
     private int id;
-    private final String nombre;
-    private final String descripcion;
-    private final Float precio;
-    private final Integer cantidad;
-    private final String image;
+    private String nombre;
+    private String descripcion;
+    private Float precio;
+    private Integer cantidad;
+    private String image;
     private Boolean selected = true;
     private Integer productCantidad;
 
@@ -28,11 +28,13 @@ public class Product implements Parcelable {
         this.cantidad = cantidad;
         this.image = image;
     }
+    public Product(){}
 
     public boolean validateFieldsProduct() {
         return nombre != null && !nombre.isEmpty()
                 && descripcion != null && !descripcion.isEmpty()
-                && precio != null && cantidad != null
+                && precio != null && precio != 0
+                && cantidad != null&& cantidad != 0
                 && image != null && !image.isEmpty();
     }
 

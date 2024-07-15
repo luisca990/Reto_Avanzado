@@ -65,14 +65,15 @@ public class AddUpdateFragment extends BaseFragment {
             Product item = new Product(
                     name.getText().toString(),
                     description.getText().toString(),
-                    (product == null)?null:Float.parseFloat(precio.getText().toString()),
-                    (product == null)?null:Integer.parseInt(count.getText().toString()),
+                    (product == null)?0:Float.parseFloat(precio.getText().toString()),
+                    (product == null)?0:Integer.parseInt(count.getText().toString()),
                     url.getText().toString()
-            );
+            );;
             if (product == null){
                 presenter.insertProduct(item);
                 return;
             }
+
             item.setId(product.getId());
             product = item;
             presenter.updateProduct(item);
