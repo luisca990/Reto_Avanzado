@@ -68,7 +68,7 @@ public class AddUpdateFragment extends BaseFragment {
                     (product == null)?0:Float.parseFloat(precio.getText().toString()),
                     (product == null)?0:Integer.parseInt(count.getText().toString()),
                     url.getText().toString()
-            );;
+            );
             if (product == null){
                 presenter.insertProduct(item);
                 return;
