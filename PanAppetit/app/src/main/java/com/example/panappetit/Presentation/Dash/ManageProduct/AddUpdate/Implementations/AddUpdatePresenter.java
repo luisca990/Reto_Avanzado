@@ -18,11 +18,11 @@ public class AddUpdatePresenter implements IAddUpdatePresenter {
         this.view = view;
         this.context = context;
         dao = new ProductDao(context);
-        dao.openDb();
     }
 
     @Override
     public void insertProduct(Product product) {
+        dao.openDb();
         if (!product.validateFieldsProduct()) {
             view.showDialogAdvertence(R.string.fiels_vacio, context.getString(R.string.mess_fiels_vacio), DialogueGenerico.TypeDialogue.ADVERTENCIA);
             return;
@@ -33,6 +33,7 @@ public class AddUpdatePresenter implements IAddUpdatePresenter {
 
     @Override
     public void updateProduct(Product product) {
+        dao.openDb();
         if (!product.validateFieldsProduct()) {
             view.showDialogAdvertence(R.string.fiels_vacio, context.getString(R.string.mess_fiels_vacio), DialogueGenerico.TypeDialogue.ADVERTENCIA);
             return;

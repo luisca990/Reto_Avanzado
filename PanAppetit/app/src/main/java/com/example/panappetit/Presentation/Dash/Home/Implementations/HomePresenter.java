@@ -17,19 +17,19 @@ public class HomePresenter implements IHomePresenter {
     public HomePresenter(IHomeView view, Context context) {
         this.view = view;
         dao = new ProductDao(context);
-        dao.openDb();
         daoP = new PedidoDao(context);
-        daoP.openDb();
     }
 
     @Override
     public void getAllProductsSuccess() {
+        dao.openDb();
         view.showGetAllProductsSuccess(Product.getListProduct(dao));
         dao.closeDb();
     }
 
     @Override
     public void getLastPedidoByUserId(int userId) {
+        daoP.openDb();
         view.showGetLastPedidoSuccess(Pedido.getLastPedidoByUserId(daoP, userId));
         daoP.closeDb();
     }

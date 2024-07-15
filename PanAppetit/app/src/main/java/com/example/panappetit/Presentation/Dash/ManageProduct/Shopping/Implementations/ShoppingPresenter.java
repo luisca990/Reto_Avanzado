@@ -18,11 +18,11 @@ public class ShoppingPresenter implements IShoppingPresenter {
         this.view = view;
         this.context = context;
         dao = new VentaDao(context);
-        dao.openDb();
     }
 
     @Override
     public void insertVenta(Venta venta, int idPedido) {
+        dao.openDb();
         if (!venta.validateFieldsVenta()) {
             view.showDialogAdvertence(R.string.fiels_vacio, context.getString(R.string.mess_fiels_vacio), DialogueGenerico.TypeDialogue.ADVERTENCIA);
             return;
@@ -33,6 +33,7 @@ public class ShoppingPresenter implements IShoppingPresenter {
 
     @Override
     public void deleteDetallePedido(int idProduct, int idPedido) {
+        dao.openDb();
         view.showActionDelete(Venta.deleteDetallePedido(dao, idProduct, idPedido));
         dao.closeDb();
     }
