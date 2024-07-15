@@ -13,19 +13,16 @@ import com.example.panappetit.Utils.DialogueGenerico;
 
 public class HistoryPresenter implements IHistoryPresenter {
     private final IHistoryView view;
-    private final Context context;
     private final VentaDao dao;
 
-    public HistoryPresenter(IHistoryView view, Context context) {
+    public HistoryPresenter(IHistoryView view, VentaDao dao) {
         this.view = view;
-        this.context = context;
-        dao = new VentaDao(context);
+       this.dao = dao;
+        dao.openDb();
     }
 
     @Override
     public void getAllVentas(int idUser) {
-        dao.openDb();
         view.getAllVentas(Venta.getAllVentas(dao, idUser));
-        dao.closeDb();
     }
 }

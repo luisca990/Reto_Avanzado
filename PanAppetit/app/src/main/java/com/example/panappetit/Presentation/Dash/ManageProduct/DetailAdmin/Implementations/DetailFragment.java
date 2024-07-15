@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.navigation.Navigation;
 
 import com.example.panappetit.Base.BaseFragment;
+import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Interfaces.IDetailView;
 import com.example.panappetit.R;
@@ -26,6 +27,7 @@ public class DetailFragment extends BaseFragment {
     private ImageView arrow, image;
     private TextView name, description, count, valor;
     private Button delete, update;
+    private ProductDao dao;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,7 +41,9 @@ public class DetailFragment extends BaseFragment {
         valor = getCustomView().findViewById(R.id.tv_valor_detail);
         delete = getCustomView().findViewById(R.id.btn_delete_section);
         update = getCustomView().findViewById(R.id.btn_update_section);
-        presenter = new DetailPresenter(new listenerPresenter(),getContext());
+
+        dao = new ProductDao(getContext());
+        presenter = new DetailPresenter(new listenerPresenter(), dao);
 
         if (getArguments() != null) {
             Product item = getArguments().getParcelable("product");
@@ -87,5 +91,10 @@ public class DetailFragment extends BaseFragment {
                 dialogueFragment(R.string.delete_product, "No se elimino correctamente el producto, hubo un error", DialogueGenerico.TypeDialogue.OK);
             }
         }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dao.closeDb();
     }
 }

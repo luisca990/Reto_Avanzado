@@ -76,7 +76,7 @@ public class RecyclerAdapterHistorial extends RecyclerView.Adapter<RecyclerAdapt
             name.setText("IdPedido: "+venta.getId());
             precio.setText("Cantidad de Productos: "+venta.getListProduct().size());
             cantidad.setText("Valor Total: "+ venta.getMontoTotal());
-            convertImageService(venta.getListProduct().get(0).getImage(), imageView, 150);
+            if (venta.getListProduct() != null && !venta.getListProduct().isEmpty())convertImageService(venta.getListProduct().get(0).getImage(), imageView, 150);
             select.setVisibility(View.GONE);
             delete.setVisibility(View.GONE);
             imageView.setOnClickListener(v -> {

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.navigation.Navigation;
 
 import com.example.panappetit.Base.BaseFragment;
+import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.PedidoDao;
 import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Models.Pedido;
@@ -32,6 +33,7 @@ public class DetailClientFragment extends BaseFragment {
     private TextView name, description, value, countValue;
     private Button btnCart;
     private int valueCount = 0;
+    private PedidoDao dao;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,7 +55,8 @@ public class DetailClientFragment extends BaseFragment {
             }
         }
         sessionManager = new SessionManager(requireContext());
-        presenter = new DetailClientPresenter(new listenerPresenter(), getContext());
+        dao = new PedidoDao(getContext());
+        presenter = new DetailClientPresenter(new listenerPresenter(), getContext(), dao);
         return getCustomView();
     }
 
@@ -116,5 +119,11 @@ public class DetailClientFragment extends BaseFragment {
         public void showDialogAdvertence(int title, String message, DialogueGenerico.TypeDialogue type) {
             dialogueFragment(title, message, type);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dao.closeDb();
     }
 }

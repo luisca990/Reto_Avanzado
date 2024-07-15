@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.navigation.Navigation;
 import com.example.panappetit.Base.BaseFragment;
+import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Presentation.Dash.ManageProduct.AddUpdate.Interfaces.IAddUpdateView;
 import com.example.panappetit.R;
@@ -26,11 +27,15 @@ public class AddUpdateFragment extends BaseFragment {
     private TextView title;
     private EditText url, name, description, count, precio;
     private Button save;
+    private ProductDao dao;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setCustomView(inflater.inflate(R.layout.fragment_add_update, container, false));
-        presenter = new AddUpdatePresenter(new listenerPresenter(), getContext());
+
+        dao = new ProductDao(getContext());
+        presenter = new AddUpdatePresenter(new listenerPresenter(), getContext(), dao);
+
         arrow = getCustomView().findViewById(R.id.iv_back_add_update);
         title = getCustomView().findViewById(R.id.tv_title_add_update);
         image = getCustomView().findViewById(R.id.iv_image_add_update);
@@ -60,8 +65,8 @@ public class AddUpdateFragment extends BaseFragment {
             Product item = new Product(
                     name.getText().toString(),
                     description.getText().toString(),
-                    Float.parseFloat(precio.getText().toString()),
-                    Integer.parseInt(count.getText().toString()),
+                    (product == null)?null:Float.parseFloat(precio.getText().toString()),
+                    (product == null)?null:Integer.parseInt(count.getText().toString()),
                     url.getText().toString()
             );
             if (product == null){
@@ -125,5 +130,10 @@ public class AddUpdateFragment extends BaseFragment {
         public void showDialogAdvertence(int title, String message, DialogueGenerico.TypeDialogue type) {
             dialogueFragment(title, message, type);
         }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dao.closeDb();
     }
 }
