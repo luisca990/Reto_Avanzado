@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/_16dp"
+    android:paddingBottom="@dimen/_16dp"
+    android:background="@color/blackyBack"
+    tools:context=".Presentation.Dash.ManageProduct.Shopping.Implementations.ShoppingCartFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/iv_return_shopping"
+            android:layout_width="@dimen/_80dp"
+            android:layout_height="@dimen/_80dp"
+            android:src="@mipmap/ic_logo_return_purple"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="@string/shopping"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_30sp"
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="@dimen/_80dp"
+            android:layout_height="@dimen/_80dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:src="@mipmap/ic_logo_back_white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_checkbox_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_title">
+
+        <CheckBox
+            android:id="@+id/checkbox_shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sp"
+            android:checked="true"
+            android:layout_marginStart="@dimen/_16dp"
+            android:buttonTint="@color/purpleApp"
+            android:text="@string/seleccionar_todo"/>
+
+        <TextView
+            android:id="@+id/tv_monto_shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_16dp"
+            android:text="@string/monto_total"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_shopping"
+        app:layout_constraintTop_toBottomOf="@id/ll_checkbox_shopping"/>
+
+    <Button
+        android:id="@+id/btn_shopping"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15dp"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_10dp"
+        android:background="@drawable/btn_general"
+        android:text="@string/comprar"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18sp"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_shopping" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

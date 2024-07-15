@@ -9,4 +9,14 @@
         <item name="android:padding">0dp</item>
     </style>
 
+    <style name="CustomFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/CustomFABShape</item>
+        <item name="fabSize">mini</item>
+    </style>
+
+    <style name="CustomFABShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
 </resources>

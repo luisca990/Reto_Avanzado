@@ -10,6 +10,9 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -31,9 +34,81 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.panappetit.Presentation.Dash.Home.HomeFragment"
+        android:name="com.example.panappetit.Presentation.Dash.Home.Implementations.HomeFragment"
         android:label="HomeFragment">
+        <argument
+            android:name="user"
+            app:argType="string"
+            app:nullable="false"/>
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addUpdateFragment"
+            app:destination="@id/addUpdateFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailClientFragment"
+            app:destination="@id/detailClientFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Implementations.DetailFragment"
+        android:label="DetailFragment">
+        <argument
+            android:name="product"
+            app:argType="com.example.panappetit.Models.Product"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_detailFragment_to_addUpdateFragment"
+            app:destination="@id/addUpdateFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addUpdateFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.AddUpdate.Implementations.AddUpdateFragment"
+        android:label="AddUpdateFragment">
+        <argument
+            android:name="product"
+            app:argType="com.example.panappetit.Models.Product"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_addUpdateFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailClientFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.DetailClient.Implementations.DetailClientFragment"
+        android:label="DetailClientFragment">
+        <argument
+            android:name="product"
+            app:argType="com.example.panappetit.Models.Product"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.Shopping.Implementations.ShoppingCartFragment"
+        android:label="ShoppingCartFragment">
+        <argument
+            android:name="pedido"
+            app:argType="com.example.panappetit.Models.Pedido"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.panappetit.Presentation.Dash.ManageProduct.History.HistoryFragment"
+        android:label="HistoryFragment"/>
 
 </navigation>

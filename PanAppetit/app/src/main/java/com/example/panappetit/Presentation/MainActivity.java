@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.panappetit.Presentation.AccessAcount.SplashFragment;
 import com.example.panappetit.Presentation.AccessAcount.Login.Implementations.LoginFragment;
+import com.example.panappetit.Presentation.Dash.Home.Implementations.HomeFragment;
 import com.example.panappetit.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         assert navHostFragment != null;
         Fragment currentFragment = navHostFragment.getChildFragmentManager().getPrimaryNavigationFragment();
 
-        if (currentFragment instanceof SplashFragment || currentFragment instanceof LoginFragment) {
+        if (currentFragment instanceof SplashFragment || currentFragment instanceof LoginFragment|| currentFragment instanceof HomeFragment) {
             return;
         }
         super.onBackPressed();
