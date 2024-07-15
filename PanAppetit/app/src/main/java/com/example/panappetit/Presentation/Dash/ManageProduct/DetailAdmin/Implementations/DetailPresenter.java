@@ -15,11 +15,11 @@ public class DetailPresenter implements IDetailPresenter {
         this.view = view;
         this.context = context;
         dao = new ProductDao(context);
-        dao.openDb();
     }
 
     @Override
     public void deleteProduct(Product product) {
+        dao.openDb();
         view.showDeleteProduct(product.deleteProduct(dao), product.getNombre());
         dao.closeDb();
     }

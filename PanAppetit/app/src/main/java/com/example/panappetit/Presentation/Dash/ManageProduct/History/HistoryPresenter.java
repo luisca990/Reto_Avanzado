@@ -20,11 +20,11 @@ public class HistoryPresenter implements IHistoryPresenter {
         this.view = view;
         this.context = context;
         dao = new VentaDao(context);
-        dao.openDb();
     }
 
     @Override
     public void getAllVentas(int idUser) {
+        dao.openDb();
         view.getAllVentas(Venta.getAllVentas(dao, idUser));
         dao.closeDb();
     }

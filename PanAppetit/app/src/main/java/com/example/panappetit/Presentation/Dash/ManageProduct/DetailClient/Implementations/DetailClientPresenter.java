@@ -18,11 +18,11 @@ public class DetailClientPresenter implements IDetailClientPresenter {
         this.view = view;
         this.context = context;
         dao = new PedidoDao(context);
-        dao.openDb();
     }
 
     @Override
     public void insertVenta(Pedido pedido) {
+        dao.openDb();
         if (!pedido.validateFieldsPedidos()) {
             view.showDialogAdvertence(R.string.fiels_vacio, context.getString(R.string.mess_fiels_vacio), DialogueGenerico.TypeDialogue.ADVERTENCIA);
             return;
@@ -33,6 +33,7 @@ public class DetailClientPresenter implements IDetailClientPresenter {
 
     @Override
     public void updateVenta(Pedido pedido) {
+        dao.openDb();
         if (!pedido.validateFieldsPedidos()) {
             view.showDialogAdvertence(R.string.fiels_vacio, context.getString(R.string.mess_fiels_vacio), DialogueGenerico.TypeDialogue.ADVERTENCIA);
         return;
