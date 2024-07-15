@@ -14,31 +14,28 @@ public class DetailClientPresenter implements IDetailClientPresenter {
     private final Context context;
     private final PedidoDao dao;
 
-    public DetailClientPresenter(IDetailClientView view, Context context) {
+    public DetailClientPresenter(IDetailClientView view, Context context, PedidoDao dao) {
         this.view = view;
         this.context = context;
-        dao = new PedidoDao(context);
+        this.dao = dao;
+        dao.openDb();
     }
 
     @Override
     public void insertVenta(Pedido pedido) {
-        dao.openDb();
         if (!pedido.validateFieldsPedidos()) {
             view.showDialogAdvertence(R.string.fiels_vacio, context.getString(R.string.mess_fiels_vacio), DialogueGenerico.TypeDialogue.ADVERTENCIA);
             return;
         }
         view.showActionPedido(pedido.insertPedido(dao, pedido));
-        dao.closeDb();
     }
 
     @Override
     public void updateVenta(Pedido pedido) {
-        dao.openDb();
         if (!pedido.validateFieldsPedidos()) {
             view.showDialogAdvertence(R.string.fiels_vacio, context.getString(R.string.mess_fiels_vacio), DialogueGenerico.TypeDialogue.ADVERTENCIA);
         return;
     }
         view.showActionPedido(pedido.updatePedido(dao, pedido));
-        dao.closeDb();
     }
 }
