@@ -34,7 +34,6 @@ public class DetailFragment extends BaseFragment {
         setCustomView(inflater.inflate(R.layout.fragment_detail, container, false));
         image = getCustomView().findViewById(R.id.iv_image_detail);
         arrow = getCustomView().findViewById(R.id.iv_back_detail);
-        TextView title = getCustomView().findViewById(R.id.tv_title_detail);
         name = getCustomView().findViewById(R.id.tv_name_detail);
         description = getCustomView().findViewById(R.id.tv_descript_detail);
         count = getCustomView().findViewById(R.id.tv_count_detail);
@@ -46,7 +45,7 @@ public class DetailFragment extends BaseFragment {
         presenter = new DetailPresenter(new listenerPresenter(), dao);
 
         if (getArguments() != null) {
-            Product item = getArguments().getParcelable("product");
+            Product item = getArguments().getParcelable("product", Product.class);
             if (item != null) {
                 this.product = item; // Show character details immediately
             }

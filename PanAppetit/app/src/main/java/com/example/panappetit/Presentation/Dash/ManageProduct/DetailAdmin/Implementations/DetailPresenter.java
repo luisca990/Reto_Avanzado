@@ -1,6 +1,5 @@
 package com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Implementations;
 
-import android.content.Context;
 import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Interfaces.IDetailPresenter;

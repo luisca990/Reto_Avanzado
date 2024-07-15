@@ -47,7 +47,7 @@ public class AddUpdateFragment extends BaseFragment {
         save = getCustomView().findViewById(R.id.btn_add_update);
 
         if (getArguments() != null) {
-            Product item = getArguments().getParcelable("product");
+            Product item = getArguments().getParcelable("product", Product.class);
             if (item != null) {
                 this.product = item;
                 fillDataFields();

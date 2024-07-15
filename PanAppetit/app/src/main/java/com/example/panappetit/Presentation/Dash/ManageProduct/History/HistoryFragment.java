@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.panappetit.Base.BaseFragment;
@@ -18,7 +16,7 @@ import com.example.panappetit.Models.Venta;
 import com.example.panappetit.Presentation.Dash.ManageProduct.History.Adapter.OnItemClickListenerHistory;
 import com.example.panappetit.Presentation.Dash.ManageProduct.History.Interfaces.IHistoryView;
 import com.example.panappetit.R;
-import com.example.panappetit.Presentation.Dash.ManageVenta.History.Adapter.RecyclerAdapterHistorial;
+import com.example.panappetit.Presentation.Dash.ManageProduct.History.Adapter.RecyclerAdapterHistorial;
 import com.example.panappetit.Utils.DialogueGenerico;
 
 import java.util.ArrayList;
@@ -52,7 +50,7 @@ public class HistoryFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        SessionManager sessionManager = new SessionManager(getContext());
+        SessionManager sessionManager = new SessionManager(requireContext());
         presenter.getAllVentas(sessionManager.getUseId());
         arrow.setOnClickListener(v -> Navigation.findNavController(requireView()).navigateUp());
     }
@@ -70,7 +68,7 @@ public class HistoryFragment extends BaseFragment {
         }
     }
 
-    private class listenerAdapter implements OnItemClickListenerHistory{
+    private static class listenerAdapter implements OnItemClickListenerHistory{
         @Override
         public void onItemClick(Venta venta) {
 

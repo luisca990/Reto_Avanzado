@@ -49,7 +49,7 @@ public class DetailClientFragment extends BaseFragment {
         btnCart = getCustomView().findViewById(R.id.btn_add_cart);
 
         if (getArguments() != null) {
-            Product product = getArguments().getParcelable("product");
+            Product product = getArguments().getParcelable("product", Product.class);
             if (product != null) {
                 this.product = product; // Show product details immediately
             }

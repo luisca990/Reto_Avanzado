@@ -37,7 +37,7 @@ public class ShoppingCartFragment extends BaseFragment {
     private CheckBox checkBox;
     private Button shop;
     private RecyclerAdapterShopping adapter;
-    private List<Product> productsList = new ArrayList<>();
+    private final List<Product> productsList = new ArrayList<>();
     private List<Product> productsSelect = new ArrayList<>();
     private Pedido pedido;
     private float total = 0.0F;
@@ -65,7 +65,7 @@ public class ShoppingCartFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             // Obtener el objeto Pedido
-            pedido = bundle.getParcelable("pedido");
+            pedido = bundle.getParcelable("pedido", Pedido.class);
             // Usar el objeto Pedido
             if (pedido != null) {
                 productsList.addAll(pedido.getListProduct());

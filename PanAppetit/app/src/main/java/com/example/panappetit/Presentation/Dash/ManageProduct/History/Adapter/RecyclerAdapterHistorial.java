@@ -1,4 +1,4 @@
-package com.example.panappetit.Presentation.Dash.ManageVenta.History.Adapter;
+package com.example.panappetit.Presentation.Dash.ManageProduct.History.Adapter;
 
 import static com.example.panappetit.Utils.Util.convertImageService;
 
@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.panappetit.Models.Venta;
-import com.example.panappetit.Presentation.Dash.ManageProduct.History.Adapter.OnItemClickListenerHistory;
 import com.example.panappetit.R;
 
 import java.util.List;
@@ -55,7 +54,6 @@ public class RecyclerAdapterHistorial extends RecyclerView.Adapter<RecyclerAdapt
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private Boolean status = false;
         private final ImageView imageView;
         private final ImageView select;
         private final ImageView delete;
