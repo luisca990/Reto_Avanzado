@@ -84,7 +84,7 @@ public class ShoppingCartFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        arrow.setOnClickListener(v->{Navigation.findNavController(requireView()).navigateUp();});
+        arrow.setOnClickListener(v-> Navigation.findNavController(requireView()).navigateUp());
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // El CheckBox está seleccionado

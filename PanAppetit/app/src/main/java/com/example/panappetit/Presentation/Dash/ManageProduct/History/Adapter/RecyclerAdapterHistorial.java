@@ -77,9 +77,7 @@ public class RecyclerAdapterHistorial extends RecyclerView.Adapter<RecyclerAdapt
             if (venta.getListProduct() != null && !venta.getListProduct().isEmpty())convertImageService(venta.getListProduct().get(0).getImage(), imageView, 150);
             select.setVisibility(View.GONE);
             delete.setVisibility(View.GONE);
-            imageView.setOnClickListener(v -> {
-                listener.onItemClick(venta);
-            });
+            imageView.setOnClickListener(v -> listener.onItemClick(venta));
         }
     }
 }

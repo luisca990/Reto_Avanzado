@@ -86,9 +86,7 @@ public class HomeFragment extends BaseFragment {
             Toast.makeText(getContext(), getString(R.string.el_usuario)+sessionManager.getUserEmail()+getString(R.string.se_deslogueo), Toast.LENGTH_SHORT).show();
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_loginFragment);
         });
-        fabAdd.setOnClickListener(v->{
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_addUpdateFragment);
-        });
+        fabAdd.setOnClickListener(v-> Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_addUpdateFragment));
         fabCar.setOnClickListener(v->{
             if(cartPedido.getListProduct().isEmpty()){
                 dialogueFragment(R.string.shopping, getString(R.string.no_shopping), DialogueGenerico.TypeDialogue.ADVERTENCIA);
@@ -98,9 +96,7 @@ public class HomeFragment extends BaseFragment {
             bundle.putParcelable("pedido", cartPedido);
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_shoppingCartFragment, bundle);
         });
-        fabHistory.setOnClickListener(v->{
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_historyFragment);
-        });
+        fabHistory.setOnClickListener(v-> Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_historyFragment));
     }
     private void isVisibleButons() {
         if (!typeUser.equals(getString(R.string.admin))) {
