@@ -3,23 +3,17 @@ package com.example.panappetit.DataAccess.DatabaseSQLite.Daos;
 import static com.example.panappetit.Utils.Constants.TABLE_DETALLES;
 import static com.example.panappetit.Utils.Constants.TABLE_PEDIDOS;
 import static com.example.panappetit.Utils.Constants.TABLE_PRODUCTS;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import com.example.panappetit.DataAccess.DatabaseSQLite.DatabaseHelper;
 import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Models.Pedido;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PedidoDao {
-    private Context context;
+    private final Context context;
     private SQLiteDatabase db; // Objeto para interactuar con la base de datos
     private final DatabaseHelper dbHelper; // Instancia de DatabaseHelper para crear y actualizar la base de datos
 
@@ -45,12 +39,12 @@ public class PedidoDao {
         values.put("fecha_pedido", pedido.getDate()); // Inserción del date del Pedido
         values.put("monto_total", pedido.getMontoTotal()); // Inserción del monto total del Pedido
 
-        Long idPedido = db.insert(TABLE_PEDIDOS, null, values);
+        long idPedido = db.insert(TABLE_PEDIDOS, null, values);
         if (idPedido == -1){
             return idPedido;
         }
         SessionManager sessionManager = new SessionManager(context);
-        pedido.setId(Integer.parseInt(idPedido.toString()));
+        pedido.setId(Integer.parseInt(Long.toString(idPedido)));
         sessionManager.setPedido(pedido.getId(), pedido.getDate(), pedido.getMontoTotal());
         return insertDetallePedido(pedido, idPedido);
     }
@@ -82,7 +76,21 @@ public class PedidoDao {
         values.put("cantidad", pedido.getProduct().getProductCantidad());
         values.put("precio", pedido.getProduct().getPrecio());
 
-        return db.insert(TABLE_DETALLES, null, values);
+        long result = db.insert(TABLE_DETALLES, null, values);
+
+        if (result != -1) {
+            // Actualización de la cantidad en stock del producto
+            int productId = pedido.getProduct().getId();
+            int cantidad = pedido.getProduct().getProductCantidad();
+
+            String updateQuery = "UPDATE " + TABLE_PRODUCTS +
+                    " SET cantidad_stock = cantidad_stock - ?" +
+                    " WHERE id = ?";
+
+            db.execSQL(updateQuery, new Object[]{cantidad, productId});
+        }
+
+        return result;
     }
     public Pedido getLastPedidoByUserId(int userId) {
         Pedido pedido = null;

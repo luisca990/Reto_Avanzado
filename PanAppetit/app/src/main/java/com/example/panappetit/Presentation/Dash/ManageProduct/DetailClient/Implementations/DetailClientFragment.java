@@ -30,7 +30,7 @@ public class DetailClientFragment extends BaseFragment {
     private DetailClientPresenter presenter;
     private SessionManager sessionManager;
     private ImageView arrow, image, btnRest, btnAdd;
-    private TextView name, description, value, countValue;
+    private TextView name, description, value, countValue, count;
     private Button btnCart;
     private int valueCount = 0;
     private PedidoDao dao;
@@ -42,7 +42,8 @@ public class DetailClientFragment extends BaseFragment {
         arrow = getCustomView().findViewById(R.id.iv_back_detail_client);
         name = getCustomView().findViewById(R.id.tv_name_detail_client);
         description = getCustomView().findViewById(R.id.tv_descript_detail_client);
-        value = getCustomView().findViewById(R.id.tv_count_client);
+        value = getCustomView().findViewById(R.id.tv_value_client);
+        count = getCustomView().findViewById(R.id.tv_count_client);
         btnRest = getCustomView().findViewById(R.id.iv_rest_count);
         countValue = getCustomView().findViewById(R.id.tv_count_value);
         btnAdd = getCustomView().findViewById(R.id.iv_add_count);
@@ -68,6 +69,7 @@ public class DetailClientFragment extends BaseFragment {
         btnRest.setOnClickListener(v->{
             if(valueCount != 0){
                 valueCount--;
+                validateCountProduct();
                 countValue.setText(String.valueOf(valueCount));
                 return;
             }
@@ -76,13 +78,17 @@ public class DetailClientFragment extends BaseFragment {
 
         btnAdd.setOnClickListener(v->{
             valueCount++;
-            countValue.setText(String.valueOf(valueCount));});
+            validateCountProduct();
+            countValue.setText(String.valueOf(valueCount));
+        });
 
         btnCart.setOnClickListener(v->{
             if (valueCount == 0){
                 dialogueFragment(R.string.cantidad, getString(R.string.cantidad_cero), DialogueGenerico.TypeDialogue.ADVERTENCIA);
                 return;
             }
+
+            validateCountProduct();
             float monto = (valueCount*product.getPrecio()) + sessionManager.getMontoPedido();
             Date date = new Date();
             product.setProductCantidad(valueCount);
@@ -98,6 +104,16 @@ public class DetailClientFragment extends BaseFragment {
     }
 
     @SuppressLint("SetTextI18n")
+    private void validateCountProduct(){
+        if (valueCount > product.getCantidad()){
+            dialogueFragment(R.string.cantidad, getString(R.string.cantidad_max)+product.getCantidad(), DialogueGenerico.TypeDialogue.ADVERTENCIA);
+            return;
+        }
+        int cantidad = (product.getCantidad()-valueCount);
+        count.setText(getString(R.string.stock)+cantidad);
+    }
+
+    @SuppressLint("SetTextI18n")
     private void completeProductData(){
         if (product != null){
             convertImageService(product.getImage(), image, 300);
@@ -105,6 +121,7 @@ public class DetailClientFragment extends BaseFragment {
             description.setText(product.getDescripcion());
             value.setText("$ "+product.getPrecio().toString());
             countValue.setText(String.valueOf(valueCount));
+            count.setText(getString(R.string.stock)+product.getCantidad());
         }
     }
 

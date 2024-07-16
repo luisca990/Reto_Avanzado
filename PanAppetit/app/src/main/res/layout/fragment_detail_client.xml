@@ -24,6 +24,7 @@
             android:id="@+id/iv_back_detail_client"
             android:layout_width="@dimen/_80dp"
             android:layout_height="@dimen/_80dp"
+            android:importantForAccessibility="no"
             android:src="@mipmap/ic_logo_return_purple"/>
         <TextView
             android:layout_width="0dp"
@@ -38,6 +39,7 @@
             android:layout_width="@dimen/_80dp"
             android:layout_height="@dimen/_80dp"
             android:layout_marginStart="@dimen/_10dp"
+            android:importantForAccessibility="no"
             android:src="@mipmap/ic_logo_appetit"/>
     </LinearLayout>
 
@@ -112,7 +114,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sp"
                 android:layout_marginTop="@dimen/_4dp"
-                android:text="Your long text goes here. It will wrap into multiple lines automatically."
+                android:text="@string/multiple_liness"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title_descript_detail"
@@ -122,8 +124,20 @@
                 android:id="@+id/tv_count_client"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_descript_detail_client"
+                tools:ignore="TextViewEdits" />
+
+            <TextView
+                android:id="@+id/tv_value_client"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8dp"
-                android:layout_marginBottom="@dimen/_25dp"
+                android:layout_marginBottom="@dimen/_20dp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/purpleApp"
@@ -131,7 +145,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_descript_detail_client"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_client"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -156,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_25dp"
+                android:layout_marginTop="@dimen/_16dp"
                 android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -180,6 +194,7 @@
                         android:layout_width="@dimen/_45dp"
                         android:layout_height="@dimen/_45dp"
                         android:layout_marginEnd="@dimen/_16dp"
+                        android:importantForAccessibility="no"
                         android:src="@mipmap/ic_car_rest"/>
                     <TextView
                         android:id="@+id/tv_count_value"
@@ -194,6 +209,7 @@
                         android:layout_width="@dimen/_45dp"
                         android:layout_marginStart="@dimen/_16dp"
                         android:layout_height="@dimen/_45dp"
+                        android:importantForAccessibility="no"
                         android:src="@mipmap/ic_car_add"/>
                 </LinearLayout>
             </LinearLayout>
@@ -203,7 +219,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_25dp"
-                android:layout_marginBottom="@dimen/_45dp"
+                android:layout_marginBottom="@dimen/_25dp"
                 android:layout_marginStart="@dimen/_16dp"
                 android:layout_marginEnd="@dimen/_16dp"
                 android:background="@drawable/btn_purple"
