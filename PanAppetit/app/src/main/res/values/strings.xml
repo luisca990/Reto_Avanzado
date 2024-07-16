@@ -5,7 +5,7 @@
     <string name="informative">Informativo</string>
     <string name="detail_diaolog">Detalle del Dialogo</string>
 
-    <string name="init_section">Inicio de Sección</string>
+    <string name="init_section">Inicio de Sesión</string>
     <string name="Email">Correo</string>
     <string name="password">Contraseña</string>
     <string name="CaracteresPass">1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*</string>
