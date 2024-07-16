@@ -16,10 +16,14 @@ import androidx.navigation.Navigation;
 
 import com.example.panappetit.Base.BaseFragment;
 import com.example.panappetit.DataAccess.DatabaseSQLite.Daos.ProductDao;
+import com.example.panappetit.DataAccess.SharedPreferences.SessionManager;
 import com.example.panappetit.Models.Product;
 import com.example.panappetit.Presentation.Dash.ManageProduct.DetailAdmin.Interfaces.IDetailView;
 import com.example.panappetit.R;
+import com.example.panappetit.Utils.Constants;
 import com.example.panappetit.Utils.DialogueGenerico;
+
+import java.util.Objects;
 
 public class DetailFragment extends BaseFragment {
     private DetailPresenter presenter;
@@ -65,7 +69,16 @@ public class DetailFragment extends BaseFragment {
             Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show();
             presenter.deleteProduct(product);
         });
-        arrow.setOnClickListener(v->Navigation.findNavController(requireView()).navigateUp());
+        arrow.setOnClickListener(v->{
+            SessionManager sessionManager = new SessionManager(requireContext());
+            Bundle bundle = new Bundle();
+            if ((Objects.equals(sessionManager.getUserEmail(), Constants.Tag.ADMIN))) {
+                bundle.putString(Constants.Tag.USER, "admin");
+            } else {
+                bundle.putString(Constants.Tag.USER, "client");
+            }
+            Navigation.findNavController(requireView()).navigate(R.id.action_detailFragment_to_homeFragment, bundle);
+        });
         completeProductData();
     }
 
