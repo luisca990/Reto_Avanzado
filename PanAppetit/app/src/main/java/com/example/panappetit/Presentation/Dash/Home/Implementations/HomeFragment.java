@@ -41,7 +41,7 @@ public class HomeFragment extends BaseFragment {
     private FloatingActionButton fabAdd, fabCar, fabHistory;
     private ProductDao dao;
     private PedidoDao daoP;
-    private static String typeUser;
+    private String typeUser;
     private Pedido cartPedido = new Pedido();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
