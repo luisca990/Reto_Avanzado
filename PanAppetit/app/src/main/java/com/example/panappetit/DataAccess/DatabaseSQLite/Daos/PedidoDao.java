@@ -82,7 +82,21 @@ public class PedidoDao {
         values.put("cantidad", pedido.getProduct().getProductCantidad());
         values.put("precio", pedido.getProduct().getPrecio());
 
-        return db.insert(TABLE_DETALLES, null, values);
+        long result = db.insert(TABLE_DETALLES, null, values);
+
+        if (result != -1) {
+            // Actualización de la cantidad en stock del producto
+            int productId = pedido.getProduct().getId();
+            int cantidad = pedido.getProduct().getProductCantidad();
+
+            String updateQuery = "UPDATE " + TABLE_PRODUCTS +
+                    " SET cantidad_stock = cantidad_stock - ?" +
+                    " WHERE id = ?";
+
+            db.execSQL(updateQuery, new Object[]{cantidad, productId});
+        }
+
+        return result;
     }
     public Pedido getLastPedidoByUserId(int userId) {
         Pedido pedido = null;
